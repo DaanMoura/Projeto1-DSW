@@ -20,7 +20,7 @@ public class SalaTeatro {
     public SalaTeatro() {
     }
 
-    public SalaTeatro(String email, String senha, String CNPJ, String nome, String cidade) {
+    public SalaTeatro(String CNPJ, String email, String senha, String nome, String cidade) {
         this.email = email;
         this.senha = senha;
         this.CNPJ = CNPJ;

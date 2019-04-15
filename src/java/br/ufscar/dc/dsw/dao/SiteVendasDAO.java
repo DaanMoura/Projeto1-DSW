@@ -30,7 +30,6 @@ public class SiteVendasDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement = conn.prepareStatement(sql);
             statement.setString(1, site.getUrl());
             statement.setString(2, site.getEmail());
             statement.setString(3, site.getSenha());
