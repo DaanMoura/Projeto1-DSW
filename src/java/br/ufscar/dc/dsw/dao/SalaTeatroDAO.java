@@ -147,4 +147,34 @@ public class SalaTeatroDAO {
         
         return sala;
     }
+    
+    public List<SalaTeatro> getFromCity(String cidade) {
+        List<SalaTeatro> salas = new ArrayList<>();
+        String sql = "SELECT * FROM SalaTeatro "
+                + "WHERE cidade = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, cidade);
+            ResultSet resultSet = statement.executeQuery(sql);
+            
+            while (resultSet.next()) {
+                String cnpj = resultSet.getString("CNPJ");
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String nome = resultSet.getString("nome");
+                
+                SalaTeatro sala = new SalaTeatro(cnpj, email, senha, nome, cidade);
+                salas.add(sala);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        
+        return salas;
+    }
 }
