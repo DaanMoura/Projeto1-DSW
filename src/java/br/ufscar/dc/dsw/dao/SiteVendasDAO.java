@@ -18,7 +18,7 @@ public class SiteVendasDAO {
     }
 
     protected Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:derby://localhost:1527/Avaliacao1", "root", "root");
+        return DriverManager.getConnection("jdbc:derby://localhost:1527/VendaIngressoBD", "root", "root");
     }
 
     public void insert(SiteVendas site) {
