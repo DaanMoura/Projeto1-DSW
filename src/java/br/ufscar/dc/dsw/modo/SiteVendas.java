@@ -18,7 +18,7 @@ public class SiteVendas {
     
     public SiteVendas(){}
 
-    public SiteVendas(String email, String url, String senha, String nome, String telefone) {
+    public SiteVendas(String url, String email, String senha, String nome, String telefone) {
         this.email = email;
         this.url = url;
         this.senha = senha;
