@@ -28,6 +28,46 @@ public class Promocao {
 
     public Promocao() {
     }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setCNPJ(String CNPJ) {
+        this.CNPJ = CNPJ;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setPreco(float preco) {
+        this.preco = preco;
+    }
+
+    public void setHorario(Date horario) {
+        this.horario = horario;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getCNPJ() {
+        return CNPJ;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public float getPreco() {
+        return preco;
+    }
+
+    public Date getHorario() {
+        return horario;
+    }
     
     
 }
