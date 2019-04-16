@@ -9,6 +9,8 @@ import br.ufscar.dc.dsw.dao.SiteVendasDAO;
 import br.ufscar.dc.dsw.model.SiteVendas;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -83,10 +85,17 @@ public class SiteVendasController extends HttpServlet {
                 update(request,response);
                 break;
             default:
+                lista(request,response);
                                       
         }
     }
 
+    public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        List<SiteVendas> lista = dao.getAll();
+        request.setAttribute("lista", lista);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaSite.jsp");
+        dispatcher.forward(request,response); 
+    }
     public void apresentaForm(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException{
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroSite.jsp");
         dispatcher.forward(request,response);
