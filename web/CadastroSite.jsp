@@ -16,10 +16,10 @@
         <h1>Cadastro de sites</h1>
     </center>
     <div align="center">
-         <c:if test="${cadastro != null}"> <%-- --%>
+         <c:if test="${site != null}"> 
             <form action="atualizacao" method="post">
             </c:if>
-            <c:if test="${cadastro == null}">
+            <c:if test="${site == null}">
                 <form action="insercao" method="post">
                 </c:if>
         <form name="form">
@@ -54,7 +54,14 @@
                         <input type="number" name="telefone" size="45" required/>
                     </td>
                 </tr>
+               
             </table>  
+            <br>
+             <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" value="Cadastrar" />
+                        </td>
+                </tr>
         </form>
     </div>
 </body>
