@@ -6,7 +6,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.SiteVendasDAO;
-import br.ufscar.dc.dsw.modo.SiteVendas;
+import br.ufscar.dc.dsw.model.SiteVendas;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -68,9 +68,11 @@ public class SiteVendasController extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getServletPath();
         switch(action){
-            case "/cadastro_site":
+            case "/cadastro":
                 apresentaForm(request,response);
                 break;
+            case "/edicao":
+                apresentaFormEdicao(request,response);
             case "/insercao":
                 insere(request,response);
                 break;
@@ -78,7 +80,7 @@ public class SiteVendasController extends HttpServlet {
                 remove(request,response);
                 break;
             case "/atualizacao":
-                
+                update(request,response);
                 break;
             default:
                                       
@@ -90,7 +92,7 @@ public class SiteVendasController extends HttpServlet {
         dispatcher.forward(request,response);
     }
     
-    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response){
+    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
         String url = request.getParameter("url");
         SiteVendas site = dao.getFromURL(url);
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroSite.jsp");
@@ -117,7 +119,7 @@ public class SiteVendasController extends HttpServlet {
        response.sendRedirect("admin");
    }
    
-   public void update(HttpServletRequest request, HttpServletResponse response){
+   public void update(HttpServletRequest request, HttpServletResponse response)throws IOException{
        String url = request.getParameter("url");
        String email = request.getParameter("email");
        String senha = request.getParameter("senha");
@@ -125,7 +127,7 @@ public class SiteVendasController extends HttpServlet {
        String telefone = request.getParameter("telefone");
        SiteVendas site = new SiteVendas(url,email,senha,nome,telefone);
        dao.update(site);
-       response.redirect("admin");
+       response.sendRedirect("admin");
    }
     @Override
     public String getServletInfo() {

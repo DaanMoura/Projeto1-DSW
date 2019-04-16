@@ -1,6 +1,6 @@
 package br.ufscar.dc.dsw.dao;
 
-import br.ufscar.dc.dsw.modo.SiteVendas;
+import br.ufscar.dc.dsw.model.SiteVendas;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
