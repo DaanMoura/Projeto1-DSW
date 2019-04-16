@@ -35,7 +35,7 @@ public class SalaTeatroDAO {
     
     public void insert(SalaTeatro sala) {
         String sql = "INSERT INTO SalaTeatro "
-                + "(CNPJ, email, senha, nome, cidade "
+                + "(CNPJ, email, senha, nome, cidade) "
                 + "VALUES (?, ?, ?, ?, ?)";
         
         try {

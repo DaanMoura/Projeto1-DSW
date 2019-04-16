@@ -44,6 +44,32 @@ public class SiteVendasDAO {
 
     }
 
+    public List<SiteVendas> getAll() {
+      List<SiteVendas> sites = new ArrayList<>();
+      String sql = "SELECT * FROM SiteVendas";
+
+      try {
+        Connection conn = this.getConnection();
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+          String url = resultSet.getString("url");
+          String email = resultSet.getString("senha");
+          String nome = resultSet.getString("nome");
+          String telefone = resultSet.getString("telefone");
+
+          SiteVendas site = new SiteVendas(url, email, senha, nome, telefone);
+          sites.add(site);
+        }
+        resultSet.close();
+        conn.close();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
+      
+      return sites;
+    }
+
     public SiteVendas getFromURL(String url) {
         SiteVendas site = null;
         String sql = "SELECT * FROM SiteVendas "
