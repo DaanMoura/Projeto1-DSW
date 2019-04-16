@@ -10,7 +10,11 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -66,6 +70,27 @@ public class PromocaoDAO {
       }
     }
 
+    public Promocao getFromKey(String url,String CNPJ,Date horario){
+        Promocao promocao = null;
+        String sql = "SELECT * FROM Promocao WHERE url = ? AND CNPJ = ? AND horario = ?";
+        try{
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,url);
+        statement.setString(2,CNPJ);
+        statement.setDate(3,horario);
+        ResultSet resultSet = statement.executeQuery(sql);
+        if(resultSet.next()){
+         String nome = resultSet.getString("nome");
+         Float preco = resultSet.getFloat("preco");
+        }
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+        return promocao;
+    }
+    
     public List<Promocao> getAll() {
       List<Promocao> promocoes = new ArrayList<>();
       String sql = "SELECT * FROM Promocao";
@@ -106,7 +131,7 @@ public class PromocaoDAO {
         statement.setFloat(2, promocao.getPreco());
         statement.setString(3, promocao.getUrl());
         statement.setString(4, promocao.getCNPJ());
-        statement.setDate(5, promocao.getHorario());
+        statement.setDate(5, (Date) promocao.getHorario());
 
         statement.close();
         conn.close();

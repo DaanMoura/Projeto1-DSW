@@ -6,6 +6,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SiteVendasDAO {
 
@@ -54,7 +57,8 @@ public class SiteVendasDAO {
         ResultSet resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
           String url = resultSet.getString("url");
-          String email = resultSet.getString("senha");
+          String email = resultSet.getString("email");
+          String senha = resultSet.getString("senha");
           String nome = resultSet.getString("nome");
           String telefone = resultSet.getString("telefone");
 

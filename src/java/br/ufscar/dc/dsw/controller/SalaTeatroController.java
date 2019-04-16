@@ -9,6 +9,7 @@ import br.ufscar.dc.dsw.dao.SalaTeatroDAO;
 import br.ufscar.dc.dsw.model.SalaTeatro;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,10 +65,20 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
                 break;
             
             default:
+                lista(request,response);
         
         }
     }
 
+    
+    public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        List<SalaTeatro> lista = dao.getAll();
+        request.setAttribute("lista", lista);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaSite.jsp");
+        dispatcher.forward(request,response); 
+    }
+    
+    
     public void apresentaForm(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException{
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroTeatro.jsp");
         dispatcher.forward(request,response);

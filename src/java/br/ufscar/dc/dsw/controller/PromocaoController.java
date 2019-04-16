@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import static java.lang.Float.parseFloat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -80,8 +81,16 @@ public class PromocaoController extends HttpServlet {
     
     }
     
-    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response){
+    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroPromocao.jsp");
+        String url = request.getParameter("url");
+        String CNPJ = request.getParameter("cnpj");
+        Calendar calendar = parseDate(request.getParameter("horario"));
+        Date horario = calendar.getTime();
+        Promocao promocao = dao.getFromKey(url, CNPJ, (java.sql.Date) horario);
+        request.setAttribute("promocao",promocao);
+        dispatcher.forward(request,response);
+        
       //imcompleto  
     }
     
@@ -108,12 +117,27 @@ public class PromocaoController extends HttpServlet {
         dao.update(promocao);
         response.sendRedirect("site");
     }
-   public void remove(HttpServletRequest request, HttpServletResponse response){
+   public void remove(HttpServletRequest request, HttpServletResponse response) throws IOException{
    //incompleto
+   String url = request.getParameter("url");
+   String CNPJ = request.getParameter("cnpj");
+   Date horario = (Date) request.getAttribute("horario");
+   Promocao promocao = new Promocao();
+   promocao.setHorario(horario);
+   promocao.setCNPJ(CNPJ);
+   promocao.setUrl(url);
+   
+   dao.delete(promocao);
+   response.sendRedirect("site");
+
    }
    
-   public void lista(HttpServletRequest request, HttpServletResponse response){
+   public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
    //incompleto
+   List<Promocao> lista = dao.getAll();
+   request.setAttribute("lista", lista);
+   RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocao.jsp");
+   dispatcher.forward(request,response);
    }
     
     /**
