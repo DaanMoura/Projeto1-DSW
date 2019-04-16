@@ -3,73 +3,67 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.modo;
+package br.ufscar.dc.dsw.model;
 
 /**
  *
  * @author 743509
  */
-public class SalaTeatro {
+public class SiteVendas {
     private String email;
+    private String url;
     private String senha;
-    private String CNPJ;
     private String nome;
-    private String cidade;
+    private String telefone;
     
-    
-    public SalaTeatro() {
-    }
+    public SiteVendas(){}
 
-    public SalaTeatro(String email, String senha, String CNPJ, String nome, String cidade) {
+    public SiteVendas(String url, String email, String senha, String nome, String telefone) {
         this.email = email;
+        this.url = url;
         this.senha = senha;
-        this.CNPJ = CNPJ;
         this.nome = nome;
-        this.cidade = cidade;
+        this.telefone = telefone;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getUrl() {
+        return url;
     }
 
-    public String getCNPJ() {
-        return CNPJ;
+    public String getSenha() {
+        return senha;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getTelefone() {
+        return telefone;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public void setCNPJ(String CNPJ) {
-        this.CNPJ = CNPJ;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
-    
-        
-    
-    
     
 }

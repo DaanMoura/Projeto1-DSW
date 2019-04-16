@@ -3,67 +3,73 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.modo;
+package br.ufscar.dc.dsw.model;
 
 /**
  *
  * @author 743509
  */
-public class SiteVendas {
+public class SalaTeatro {
     private String email;
-    private String url;
     private String senha;
+    private String CNPJ;
     private String nome;
-    private String telefone;
+    private String cidade;
     
-    public SiteVendas(){}
+    
+    public SalaTeatro() {
+    }
 
-    public SiteVendas(String email, String url, String senha, String nome, String telefone) {
+    public SalaTeatro(String CNPJ, String email, String senha, String nome, String cidade) {
         this.email = email;
-        this.url = url;
         this.senha = senha;
+        this.CNPJ = CNPJ;
         this.nome = nome;
-        this.telefone = telefone;
+        this.cidade = cidade;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
     public String getSenha() {
         return senha;
+    }
+
+    public String getCNPJ() {
+        return CNPJ;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getCidade() {
+        return cidade;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public void setCNPJ(String CNPJ) {
+        this.CNPJ = CNPJ;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
+    
+        
+    
+    
     
 }
