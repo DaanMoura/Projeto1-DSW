@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.modo;
+package br.ufscar.dc.dsw.model;
 
 import java.util.Date;
 
