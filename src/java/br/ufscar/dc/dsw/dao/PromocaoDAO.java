@@ -5,7 +5,7 @@
  */
 package br.ufscar.dc.dsw.dao;
 
-import br.ufscar.dc.dsw.modo.Promocao;
+import br.ufscar.dc.dsw.model.Promocao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -46,5 +46,72 @@ public class PromocaoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void delete(Promocao promocao) {
+      String sql = "DELETE FROM Promocao WHERE "
+            + "url = ? AND CNPJ = ? AND horario = ?";
+      try {
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+
+        statement.setString(1, promocao.getUrl());
+        statement.setString(2, promocao.getCNPJ());
+        statement.setDate(3, (Date) promocao.getHorario());
+        statement.executeUpdate();
+        statement.close();
+        conn.close();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
+    public List<Promocao> getAll() {
+      List<Promocao> promocoes = new ArrayList<>();
+      String sql = "SELECT * FROM Promocao";
+
+      try {
+        Connection conn = this.getConnection();
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+          String url = resultSet.getString("url");
+          String cnpj = resultSet.getString("cnpj");
+          String nome = resultSet.getString("nome");
+          float preco = resultSet.getFloat("preco");
+          Date horario = (Date) resultSet.getDate("date");
+
+          Promocao promocao = new Promocao(url, cnpj, nome, preco, horario);
+          promocoes.add(promocao);
+        }
+        resultSet.close();
+        conn.close();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
+
+      return promocoes;
+    }
+
+    //QUESTION: terá um get específico?
+    
+    public void update(Promocao promocao) {
+      String sql = "UPDATE Promocao SET "
+              + "nome = ?, preco = ?, "
+              + "WHERE url = ? AND CNPJ = ? AND horario = ?";
+      try {
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, promocao.getNome());
+        statement.setFloat(2, promocao.getPreco());
+        statement.setString(3, promocao.getUrl());
+        statement.setString(4, promocao.getCNPJ());
+        statement.setDate(5, promocao.getHorario());
+
+        statement.close();
+        conn.close();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
     }
 }
