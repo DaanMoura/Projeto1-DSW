@@ -38,7 +38,7 @@ public class SiteVendasDAO {
             statement.setString(3, site.getSenha());
             statement.setString(4, site.getNome());
             statement.setString(5, site.getTelefone());
-
+            statement.executeUpdate();
             statement.close();
             conn.close();
         } catch (SQLException e) {
@@ -110,7 +110,7 @@ public class SiteVendasDAO {
                 + "email = ?, "
                 + "senha = ?, "
                 + "nome = ?, "
-                + "telefone = ?,"
+                + "telefone = ? "
                 + "WHERE url = ?";
         
         try {

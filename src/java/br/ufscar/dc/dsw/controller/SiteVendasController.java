@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 743509
  */
-@WebServlet(name = "SiteVendasController", urlPatterns = {"/admin"})
+@WebServlet( urlPatterns = {"/admin"})
 public class SiteVendasController extends HttpServlet {
     private SiteVendasDAO dao;
     
@@ -92,8 +92,8 @@ public class SiteVendasController extends HttpServlet {
 
     public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         List<SiteVendas> lista = dao.getAll();
-        request.setAttribute("lista", lista);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaSite.jsp");
+        request.setAttribute("ListaSites", lista);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaSites.jsp");
         dispatcher.forward(request,response); 
     }
     public void apresentaForm(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException{
