@@ -13,6 +13,7 @@
         <title>Venda de Ingressos</title>
     </head>
     <body>
+        
         <div align="center">
         <table border="1" cellpadding="5">
             <caption><h2>Lista sites</h2></caption>
@@ -20,6 +21,7 @@
                 <th>URL</th>
                 <th>Nome</th>
                 <th>Telefone</th>
+                <th>Ações</th>
           
             </tr>
             <c:forEach var="site" items="${requestScope.ListaSites}">
@@ -39,6 +41,10 @@
                 </tr>
             </c:forEach>
         </table>
-    </div>	
+    </div>
+        
+    <center>    
+        <br><a href="CadastroSite.jsp">Cadastrar novo site</a>
+    </center>
     </body>
 </html>
