@@ -1,6 +1,6 @@
 <%-- 
-    Document   : CadastroSite
-    Created on : 15/04/2019, 10:19:28
+    Document   : CadastroSala
+    Created on : 18/04/2019, 18:41:11
     Author     : Marcos Felipe
 --%>
 
@@ -14,31 +14,32 @@
     </head>
     <body>
     <center>
-        <h1>Sites de Vendas</h1>
+        <h1>Salas de Teatro</h1>
     </center>
     <div align="center">
-        <c:if test="${site != null}"> 
+        <c:if test="${sala != null}"> 
             <form action="atualizacao" method="post">
             </c:if>
-            <c:if test="${site == null}">
+            <c:if test="${sala == null}">
                 <form action="insercao" method="post">
                 </c:if>
                 <form name="form">
                     <table border="1" cellpadding="5">
                         <caption>
                             <h2>
-                                <c:if test="${site != null}">
+                                <c:if test="${sala != null}">
                                     Edição
-                                    <input type="hidden" name="url" value="<c:out value='${site.url}' />" 
+                                    <input type="hidden" name="cnpj" value="<c:out value='${sala.cnpj}' />" 
                                            />
                                 </c:if>
-                                <c:if test="${site == null}">
+                                <c:if test="${sala == null}">
                                     Cadastro    
                                     <tr>
-                                        <th>URL: </th>
+                                        <th>CNPJ: </th>
                                         <td>
-                                            <input type="text" name="url" size="45" required
-                                                   value= "<c:out value='${site.url}' />"       
+                                            <input type="text" name="cnpj" size="45" 
+                                                   placeholder="xx.xxx.xxx/xxxx-xx" required
+                                                   value= "<c:out value='${sala.cnpj}' />"       
                                                    />
                                         </td>
                                     </tr>
@@ -49,15 +50,23 @@
                             <th>Nome: </th>
                             <td>
                                 <input type="text" name="nome" size="45" required
-                                       value= "<c:out value='${site.nome}' />"
+                                       value= "<c:out value='${sala.nome}' />"
                                        />
                             </td><br>
+                        </tr>
+                        <tr>
+                            <th>Cidade: </th>
+                            <td>
+                                <input type="text" name="cidade" size="45" required
+                                       value= "<c:out value='${sala.cidade}' />"       
+                                       />
+                            </td>
                         </tr>
                         <tr>
                             <th>E-mail: </th>
                             <td>
                                 <input type="text" name="email" size="45" required
-                                       value= "<c:out value='${site.email}' />"
+                                       value= "<c:out value='${sala.email}' />"
                                        />
                             </td>
                         </tr>
@@ -65,18 +74,9 @@
                             <th>Senha: </th>
                             <td>
                                 <input type="password" name="senha" size="45" required
-                                       value= "<c:out value='${site.senha}' />"       
+                                       value= "<c:out value='${sala.senha}' />"       
                                        />
                             </td>    
-                        </tr>
-                        <tr>
-                            <th>Telefone: </th>
-                            <td>
-                                <input type="number" name="telefone" size="45"
-                                       placeholder="xxxxx-xxxx" required
-                                       value= "<c:out value='${site.telefone}' />"       
-                                       />
-                            </td>
                         </tr>
                     </table>  
                     <br>

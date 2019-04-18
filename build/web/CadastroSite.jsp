@@ -14,7 +14,7 @@
     </head>
     <body>
     <center>
-        <h1>Cadastro de sites</h1>
+        <h1>Sites de Vendas</h1>
     </center>
     <div align="center">
         <c:if test="${site != null}"> 
@@ -72,7 +72,8 @@
                         <tr>
                             <th>Telefone: </th>
                             <td>
-                                <input type="number" name="telefone" size="45" required
+                                <input type="number" name="telefone" size="45"
+                                       placeholder="xxxxx-xxxx" required
                                        value= "<c:out value='${site.telefone}' />"       
                                        />
                             </td>
