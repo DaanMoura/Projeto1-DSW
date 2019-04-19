@@ -31,9 +31,9 @@
                     <td><c:out value="${sala.cidade}" /></td>
                   
                     <td>
-                        <a href="edicao?CNPJ=<c:out value='${sala.CNPJ}' />">Edição</a>
+                        <a href="edicaoTeatro?CNPJ=<c:out value='${sala.CNPJ}' />">Edição</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="remocao?CNPJ=<c:out value='${sala.CNPJ}' />" 
+                        <a href="remocaoTeatro?CNPJ=<c:out value='${sala.CNPJ}' />" 
                            onclick="return confirm('Tem certeza de que deseja excluir este item?');">
                             Remoção
                         </a>                    	

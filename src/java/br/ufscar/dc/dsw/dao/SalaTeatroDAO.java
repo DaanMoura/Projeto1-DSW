@@ -112,6 +112,7 @@ public class SalaTeatroDAO {
             statement.setString(3, sala.getNome());
             statement.setString(4, sala.getCidade());
             statement.setString(5, sala.getCNPJ());
+            statement.executeUpdate();
             
             statement.close();
             conn.close();
