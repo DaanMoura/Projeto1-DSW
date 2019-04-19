@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author augusto
  */
-@WebServlet(name = "SalaTeatroController", urlPatterns = {"/SalaTeatroController"})
+@WebServlet(urlPatterns = {"/SalaTeatroController"})
 public class SalaTeatroController extends HttpServlet {
 private SalaTeatroDAO dao = new SalaTeatroDAO();
     /**
@@ -48,19 +48,19 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
             throws ServletException, IOException {
         String action = request.getServletPath();
         switch(action){
-            case "/cadastro":
+            case "/cadastroTeatro":
                 apresentaForm(request,response);
                 break;
-            case "/edicao":
+            case "/edicaoTeatro":
                 apresentaFormEdicao(request,response);
                 break;
-            case "/insercao":
+            case "/insercaoTeatro":
                 insere(request,response);
                 break;
-            case "/remocao":
+            case "/remocaoTeatro":
                 remove(request,response);
                 break;
-            case "/atualizacao":
+            case "/atualizacaoTeatro":
                 update(request,response);
                 break;
             
@@ -73,8 +73,8 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
     
     public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         List<SalaTeatro> lista = dao.getAll();
-        request.setAttribute("lista", lista);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaSite.jsp");
+        request.setAttribute("ListaTeatros", lista);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaTeatros.jsp");
         dispatcher.forward(request,response); 
     }
     
@@ -85,14 +85,14 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
     }
     public void apresentaFormEdicao(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroTeatro.jsp");
-        String CNPJ = request.getParameter("cnpj");
+        String CNPJ = request.getParameter("CNPJ");
         SalaTeatro sala = dao.getFromCnpj(CNPJ);
         request.setAttribute("sala",sala);
         dispatcher.forward(request, response);
     }
     
     public void insere(HttpServletRequest request,HttpServletResponse response) throws IOException{
-        String CNPJ = request.getParameter("cnpj");
+        String CNPJ = request.getParameter("CNPJ");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
         String cidade = request.getParameter("cidade");
@@ -100,18 +100,18 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
         
         SalaTeatro sala = new SalaTeatro(CNPJ,email,senha,nome,cidade);
         dao.insert(sala);
-        response.sendRedirect("admin");
+        response.sendRedirect("SalaTeatroController");
     }
     
     public void remove(HttpServletRequest request,HttpServletResponse response) throws IOException{
-        String CNPJ = request.getParameter("cnpj");
+        String CNPJ = request.getParameter("CNPJ");
         SalaTeatro sala = dao.getFromCnpj(CNPJ);
         dao.delete(sala);
-        response.sendRedirect("admin");
+        response.sendRedirect("SalaTeatroController");
     }
     
     public void update(HttpServletRequest request,HttpServletResponse response) throws IOException{
-        String CNPJ = request.getParameter("cnpj");
+        String CNPJ = request.getParameter("CNPJ");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
         String cidade = request.getParameter("cidade");
@@ -119,7 +119,7 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
         
         SalaTeatro sala = new SalaTeatro(CNPJ,email,senha,nome,cidade);
         dao.update(sala);
-        response.sendRedirect("admin");
+        response.sendRedirect("SalaTeatroController");
     }
     /**
      * Handles the HTTP <code>POST</code> method.

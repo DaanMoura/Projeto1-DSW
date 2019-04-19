@@ -47,7 +47,7 @@ public class SalaTeatroDAO {
             statement.setString(3, sala.getSenha());
             statement.setString(4, sala.getNome());
             statement.setString(5, sala.getCidade());
-            
+            statement.executeUpdate();
             statement.close();
             conn.close();
         } catch (SQLException e) {
@@ -64,13 +64,13 @@ public class SalaTeatroDAO {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                String cnpj = resultSet.getString("CNPJ");
+                String CNPJ = resultSet.getString("CNPJ");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
                 String nome = resultSet.getString("nome");
                 String cidade = resultSet.getString("cidade");
                 
-                SalaTeatro sala = new SalaTeatro(cnpj, email, senha, nome, cidade);
+                SalaTeatro sala = new SalaTeatro(CNPJ, email, senha, nome, cidade);
                 salas.add(sala);
             }
             resultSet.close();
@@ -103,7 +103,7 @@ public class SalaTeatroDAO {
                 + "senha = ?, "
                 + "nome = ?, "
                 + "cidade = ? "
-                + "WHERE cnpj = ?";
+                + "WHERE CNPJ = ?";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -120,14 +120,14 @@ public class SalaTeatroDAO {
         }
     }
     
-    public SalaTeatro getFromCnpj(String cnpj) {
+    public SalaTeatro getFromCnpj(String CNPJ) {
         SalaTeatro sala = null;
         String sql = "SELECT * FROM SalaTeatro WHERE CNPJ = ?";
         
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, cnpj);
+            statement.setString(1, CNPJ);
             ResultSet resultSet = statement.executeQuery();
             
             if(resultSet.next()) {
@@ -136,7 +136,7 @@ public class SalaTeatroDAO {
                 String nome = resultSet.getString("nome");
                 String cidade = resultSet.getString("cidade");
                 
-                sala = new SalaTeatro(cnpj, email, senha, nome, cidade);
+                sala = new SalaTeatro(CNPJ, email, senha, nome, cidade);
             }
             resultSet.close();
             statement.close();
@@ -160,12 +160,12 @@ public class SalaTeatroDAO {
             ResultSet resultSet = statement.executeQuery(sql);
             
             while (resultSet.next()) {
-                String cnpj = resultSet.getString("CNPJ");
+                String CNPJ = resultSet.getString("CNPJ");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
                 String nome = resultSet.getString("nome");
                 
-                SalaTeatro sala = new SalaTeatro(cnpj, email, senha, nome, cidade);
+                SalaTeatro sala = new SalaTeatro(CNPJ, email, senha, nome, cidade);
                 salas.add(sala);
             }
             resultSet.close();

@@ -8,6 +8,11 @@
         <servlet-name>SiteVendasController</servlet-name>
         <servlet-class>br.ufscar.dc.dsw.controller.SiteVendasController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SalaTeatroController</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.controller.SalaTeatroController</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>SiteVendasController</servlet-name>
         <url-pattern>/insercao</url-pattern>
@@ -16,9 +21,20 @@
         <url-pattern>/cadastro</url-pattern>
         <url-pattern>/edicao</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>SalaTeatroController</servlet-name>
+        <url-pattern>/insercaoTeatro</url-pattern>
+        <url-pattern>/remocaoTeatro</url-pattern>
+        <url-pattern>/atualizacaoTeatro</url-pattern>
+        <url-pattern>/cadastroTeatro</url-pattern>
+        <url-pattern>/edicaoTeatro</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
 </web-app>

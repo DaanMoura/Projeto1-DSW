@@ -18,10 +18,10 @@
     </center>
     <div align="center">
         <c:if test="${sala != null}"> 
-            <form action="atualizacao" method="post">
+            <form action="atualizacaoTeatro" method="post">
             </c:if>
             <c:if test="${sala == null}">
-                <form action="insercao" method="post">
+                <form action="insercaoTeatro" method="post">
                 </c:if>
                 <form name="form">
                     <table border="1" cellpadding="5">
@@ -29,7 +29,7 @@
                             <h2>
                                 <c:if test="${sala != null}">
                                     Edição
-                                    <input type="hidden" name="cnpj" value="<c:out value='${sala.cnpj}' />" 
+                                    <input type="hidden" name="CNPJ" value="<c:out value='${sala.CNPJ}' />" 
                                            />
                                 </c:if>
                                 <c:if test="${sala == null}">
@@ -37,9 +37,9 @@
                                     <tr>
                                         <th>CNPJ: </th>
                                         <td>
-                                            <input type="text" name="cnpj" size="45" 
+                                            <input type="text" name="CNPJ" size="45" 
                                                    placeholder="xx.xxx.xxx/xxxx-xx" required
-                                                   value= "<c:out value='${sala.cnpj}' />"       
+                                                   value= "<c:out value='${sala.CNPJ}' />"       
                                                    />
                                         </td>
                                     </tr>
