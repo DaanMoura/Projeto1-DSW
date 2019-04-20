@@ -78,6 +78,22 @@
                                        />
                             </td>
                         </tr>
+                        <tr>
+                            <th>Data: </th>
+                            <td>
+                                <input type="date" name="dataa" size="45" required
+                                       value= "<c:out value='${promocao.dataa}' />"
+                                       />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Horário: </th>
+                            <td>
+                                <input type="time" name="horario" size="45" required
+                                       value= "<c:out value='${promocao.horario}' />"
+                                       />
+                            </td>
+                        </tr>
                     </table>  
                     <br>
                     <tr>

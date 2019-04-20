@@ -30,7 +30,8 @@ CREATE TABLE Promocao(
     CNPJ varchar(14),
     nome varchar(50),
     preco float,
-    horario date,
+    horario time,
+    dataa date,
 
 CONSTRAINT pk_Promocao PRIMARY KEY(url,CNPJ,horario),
 CONSTRAINT fk1_Promocao FOREIGN KEY(CNPJ) REFERENCES SalaTeatro(CNPJ),
