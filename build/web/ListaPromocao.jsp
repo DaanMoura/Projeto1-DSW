@@ -4,12 +4,6 @@
     Author     : Marcos Felipe
 --%>
 
-<%-- 
-    Document   : lista
-    Created on : 16/04/2019, 11:58:11
-    Author     : Marcos Felipe
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -38,8 +32,7 @@
                     <td><c:out value="${promocao.url}" /></td>
                     <td><c:out value="${promocao.CNPJ}" /></td>
                     <td><c:out value="${promocao.nome}" /></td>
-                    <td><c:out value="${promocao.dataa}" /></td>
-                    <td><c:out value="${promocao.hora}" /></td>
+                    <td><c:out value="${promocao.horario}" /></td>
                     <td><c:out value="${promocao.preco}" /></td>
                   
                     <td>

@@ -46,7 +46,11 @@ public class PromocaoDAO {
             statement.setString(2, promocao.getCNPJ());
             statement.setString(3, promocao.getNome());
             statement.setFloat(4, promocao.getPreco());
-            statement.setDate(5, (Date) promocao.getHorario());
+            statement.setDate(5, new java.sql.Date(promocao.getHorario().getTime()));
+            
+            statement.executeUpdate();
+            statement.close();
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -58,10 +62,11 @@ public class PromocaoDAO {
       try {
         Connection conn = this.getConnection();
         PreparedStatement statement = conn.prepareStatement(sql);
+        
 
         statement.setString(1, promocao.getUrl());
         statement.setString(2, promocao.getCNPJ());
-        statement.setDate(3, (Date) promocao.getHorario());
+        statement.setDate(3, new java.sql.Date(promocao.getHorario().getTime()));
         statement.executeUpdate();
         statement.close();
         conn.close();
@@ -131,7 +136,8 @@ public class PromocaoDAO {
         statement.setFloat(2, promocao.getPreco());
         statement.setString(3, promocao.getUrl());
         statement.setString(4, promocao.getCNPJ());
-        statement.setDate(5, (Date) promocao.getHorario());
+        statement.setDate(5, new java.sql.Date(promocao.getHorario().getTime()));
+        statement.executeUpdate();
 
         statement.close();
         conn.close();

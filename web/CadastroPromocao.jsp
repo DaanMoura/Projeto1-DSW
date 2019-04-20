@@ -4,12 +4,6 @@
     Author     : Marcos Felipe
 --%>
 
-<%-- 
-    Document   : Cadastropromocao
-    Created on : 15/04/2019, 10:19:28
-    Author     : Marcos Felipe
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -59,9 +53,6 @@
                                 </c:if>
                             </h2>
                         </caption>
-                        <input type="hidden" name="horario" 
-                               value="<c:out value='${promocao.horario}' />" 
-                        />
                         <tr>
                             <th>Nome da peça: </th>
                             <td>
@@ -79,17 +70,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>Data: </th>
-                            <td>
-                                <input type="date" name="dataa" size="45" required
-                                       value= "<c:out value='${promocao.dataa}' />"
-                                       />
-                            </td>
-                        </tr>
-                        <tr>
                             <th>Horário: </th>
                             <td>
-                                <input type="time" name="horario" size="45" required
+                                <input type="text" name="horario" size="45" required
                                        value= "<c:out value='${promocao.horario}' />"
                                        />
                             </td>
