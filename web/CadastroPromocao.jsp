@@ -29,9 +29,9 @@
                             <h2>
                                 <c:if test="${promocao != null}">
                                     Edição
-                                    <input type="hidden" name="url" value="<c:out value='${promocao.url}' />" 
-                                    <input type="hidden" name="CNPJ" value="<c:out value='${promocao.CNPJ}' />" 
-                                           />
+                                    <input type="hidden" name="url" value="<c:out value='${promocao.url}' />"/> 
+                                    <input type="hidden" name="CNPJ" value="<c:out value='${promocao.CNPJ}' />"/>
+                                    <input type="hidden" name="horario" value="<c:out value='${promocao.horario}'/>"/>                                
                                 </c:if>
                                 <c:if test="${promocao == null}">
                                     Cadastro    
@@ -48,6 +48,22 @@
                                         <td>
                                             <input type="text" name="CNPJ" size="45" required
                                                    value= "<c:out value='${promocao.CNPJ}' />"
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Data: </th>
+                                        <td>
+                                            <input type="date" name="data" size="45" required
+                                                   value= "<c:out value='${promocao.horario}' />"
+                                                   />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Horario: </th>
+                                        <td>
+                                            <input type="time" name="horario" size="45" required
+                                                   value= "<c:out value='${promocao.horario}' />"
+                                                   />
                                         </td>
                                     </tr>
                                 </c:if>
@@ -69,22 +85,7 @@
                                        />
                             </td>
                         </tr>
-                        <tr>
-                            <th>Data: </th>
-                            <td>
-                                <input type="date" name="data" size="45" required
-                                       value= "<c:out value='${promocao.horario}' />"
-                                       />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Horario: </th>
-                            <td>
-                                <input type="time" name="horario" size="45" required
-                                       value= "<c:out value='${promocao.horario}' />"
-                                       />
-                            </td>
-                        </tr>
+                        
                     </table>  
                     <br>
                     <tr>

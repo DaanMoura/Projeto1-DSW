@@ -92,7 +92,7 @@ public class PromocaoController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroPromocao.jsp");
         String url = request.getParameter("url");
         String CNPJ = request.getParameter("CNPJ");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz YYYY");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
         String hor = request.getParameter("horario");
         Date horario = dateFormat.parse(hor);
         Promocao promocao = dao.getFromKey(url, CNPJ,horario);
@@ -122,10 +122,9 @@ public class PromocaoController extends HttpServlet {
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
         float preco = parseFloat(request.getParameter("preco"));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String hor = request.getParameter("date");
-        hor += " " + request.getParameter("horario");
-        Date horario = dateFormat.parse(hor);      
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+        String hor = request.getParameter("horario");
+        Date horario = dateFormat.parse(hor);   
         Promocao promocao = new Promocao(url,CNPJ,nome,preco,horario);
         dao.update(promocao);
         response.sendRedirect("PromocaoController");
@@ -134,17 +133,16 @@ public class PromocaoController extends HttpServlet {
    //incompleto
    String url = request.getParameter("url");
    String CNPJ = request.getParameter("CNPJ");
-   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-   String hor = request.getParameter("date");
-   hor += " " + request.getParameter("horario");
-   Date horario = dateFormat.parse(hor);      
+   SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+   String hor = request.getParameter("horario");
+   Date horario = dateFormat.parse(hor);    
    Promocao promocao = new Promocao();
    promocao.setHorario(horario);
    promocao.setCNPJ(CNPJ);
    promocao.setUrl(url);
    
    dao.delete(promocao);
-   response.sendRedirect("site");
+   response.sendRedirect("PromocaoController");
 
    }
    

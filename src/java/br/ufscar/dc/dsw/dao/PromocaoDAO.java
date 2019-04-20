@@ -77,7 +77,7 @@ public class PromocaoDAO {
     }
 
     public Promocao getFromKey(String url,String CNPJ,Date horario){
-        Promocao promocao = null;
+        Promocao promocao = new Promocao();
         String sql = "SELECT * FROM Promocao WHERE url = ? AND CNPJ = ? AND horario = ?";
         try{
         Connection conn = this.getConnection();
@@ -85,10 +85,15 @@ public class PromocaoDAO {
         statement.setString(1,url);
         statement.setString(2,CNPJ);
         statement.setTimestamp(3, new Timestamp(horario.getTime()));
-        ResultSet resultSet = statement.executeQuery(sql);
+        ResultSet resultSet = statement.executeQuery();
         if(resultSet.next()){
-         String nome = resultSet.getString("nome");
-         Float preco = resultSet.getFloat("preco");
+        String nome = resultSet.getString("nome");
+        Float preco = resultSet.getFloat("preco");
+        promocao.setCNPJ(CNPJ);
+        promocao.setHorario(horario);
+        promocao.setUrl(url);
+        promocao.setNome(nome);
+        promocao.setPreco(preco);
         }
         }
         catch(SQLException e){
@@ -128,7 +133,7 @@ public class PromocaoDAO {
     
     public void update(Promocao promocao) {
       String sql = "UPDATE Promocao SET "
-              + "nome = ?, preco = ?, "
+              + "nome = ?, preco = ? "
               + "WHERE url = ? AND CNPJ = ? AND horario = ?";
       try {
         Connection conn = this.getConnection();
