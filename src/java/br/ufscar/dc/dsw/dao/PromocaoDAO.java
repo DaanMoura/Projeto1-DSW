@@ -16,6 +16,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -75,6 +77,28 @@ public class PromocaoDAO {
         throw new RuntimeException(e);
       }
     }
+    
+    public boolean checkValidity(String url,String CNPJ,Date horario) throws SQLException{
+        String sql = "SELECT * FROM Promocao WHERE (url = ? AND horario = ?) OR (CNPJ = ? AND horario = ?)";
+        try{
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,url);
+        statement.setString(3,CNPJ);
+        statement.setTimestamp(2, new Timestamp(horario.getTime()));
+        statement.setTimestamp(4, new Timestamp(horario.getTime()));
+        ResultSet resultSet = statement.executeQuery();
+        if(resultSet.next()){
+            return false;
+            }
+        else{
+            return true;
+        }
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 
     public Promocao getFromKey(String url,String CNPJ,Date horario){
         Promocao promocao = new Promocao();
@@ -127,6 +151,35 @@ public class PromocaoDAO {
       }
 
       return promocoes;
+    }
+    
+    public List<Promocao> getFromCNPJ(String CNPJ){
+       
+            List<Promocao> promocoes = new ArrayList<>();
+            String sql = "SELECT * FROM Promocao WHERE CNPJ = ?";
+             try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1,CNPJ);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                String url = resultSet.getString("url");
+                String cnpj = resultSet.getString("cnpj");
+                String nome = resultSet.getString("nome");
+                float preco = resultSet.getFloat("preco");
+                Date horario = new Date(resultSet.getTimestamp("horario").getTime());
+
+                Promocao promocao = new Promocao(url, cnpj, nome, preco, horario);
+                promocoes.add(promocao);
+            }
+                 resultSet.close();
+                 conn.close();
+                 
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return promocoes; 
     }
 
     //QUESTION: terá um get específico?

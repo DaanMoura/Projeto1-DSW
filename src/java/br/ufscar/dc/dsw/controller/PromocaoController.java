@@ -10,6 +10,7 @@ import br.ufscar.dc.dsw.model.Promocao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Float.parseFloat;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -79,6 +80,8 @@ public class PromocaoController extends HttpServlet {
                      
              }} catch (ParseException ex) {
              Logger.getLogger(PromocaoController.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SQLException ex) {
+             Logger.getLogger(PromocaoController.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
 
@@ -102,7 +105,7 @@ public class PromocaoController extends HttpServlet {
       //imcompleto  
     }
     
-    public void insere(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
+    public void insere(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException, SQLException, ServletException{
         String url = request.getParameter("url");
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
@@ -111,10 +114,16 @@ public class PromocaoController extends HttpServlet {
         String hor = request.getParameter("data");
         hor += " " + request.getParameter("horario");
         Date horario = dateFormat.parse(hor);      
-        
+        if(dao.checkValidity(url, CNPJ, horario)){
         Promocao promocao = new Promocao(url,CNPJ,nome,preco,horario);
         dao.insert(promocao);
         response.sendRedirect("PromocaoController");
+        }
+        else{
+        RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroPromocao.jsp");
+        request.setAttribute("mensagem_insercao",true);
+        dispatcher.forward(request, response);
+        }
     }
     
     public void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
