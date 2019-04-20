@@ -36,7 +36,7 @@
                     <td><c:out value="${promocao.preco}" /></td>
                   
                     <td>
-                        <a href="edicaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />">Edição</a>
+                        <a href="edicaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />&url=<c:out value='${promocao.url}'/>&horario=<c:out value='${promocao.horario}'/>">Edição</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="remocaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />" 
                            onclick="return confirm('Tem certeza de que deseja excluir este item?');">

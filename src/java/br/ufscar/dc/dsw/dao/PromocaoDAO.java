@@ -7,13 +7,14 @@ package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.model.Promocao;
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,7 +47,7 @@ public class PromocaoDAO {
             statement.setString(2, promocao.getCNPJ());
             statement.setString(3, promocao.getNome());
             statement.setFloat(4, promocao.getPreco());
-            statement.setDate(5, new java.sql.Date(promocao.getHorario().getTime()));
+            statement.setTimestamp(5, new Timestamp(promocao.getHorario().getTime()));
             
             statement.executeUpdate();
             statement.close();
@@ -66,7 +67,7 @@ public class PromocaoDAO {
 
         statement.setString(1, promocao.getUrl());
         statement.setString(2, promocao.getCNPJ());
-        statement.setDate(3, new java.sql.Date(promocao.getHorario().getTime()));
+        statement.setTimestamp(3, new Timestamp(promocao.getHorario().getTime()));
         statement.executeUpdate();
         statement.close();
         conn.close();
@@ -83,7 +84,7 @@ public class PromocaoDAO {
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1,url);
         statement.setString(2,CNPJ);
-        statement.setDate(3,horario);
+        statement.setTimestamp(3, new Timestamp(horario.getTime()));
         ResultSet resultSet = statement.executeQuery(sql);
         if(resultSet.next()){
          String nome = resultSet.getString("nome");
@@ -109,7 +110,7 @@ public class PromocaoDAO {
           String cnpj = resultSet.getString("cnpj");
           String nome = resultSet.getString("nome");
           float preco = resultSet.getFloat("preco");
-          Date horario = (Date) resultSet.getDate("date");
+          Date horario = new Date(resultSet.getTimestamp("horario").getTime());
 
           Promocao promocao = new Promocao(url, cnpj, nome, preco, horario);
           promocoes.add(promocao);
@@ -136,7 +137,7 @@ public class PromocaoDAO {
         statement.setFloat(2, promocao.getPreco());
         statement.setString(3, promocao.getUrl());
         statement.setString(4, promocao.getCNPJ());
-        statement.setDate(5, new java.sql.Date(promocao.getHorario().getTime()));
+        statement.setTimestamp(5, new Timestamp(promocao.getHorario().getTime()));
         statement.executeUpdate();
 
         statement.close();

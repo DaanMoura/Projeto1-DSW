@@ -10,9 +10,13 @@ import br.ufscar.dc.dsw.model.Promocao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Float.parseFloat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,27 +56,30 @@ public class PromocaoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getServletPath();
-        switch(action){
-            case "/insercaoPromocao":
-                insere(request,response);
-                break;
-            case "/atualizacaoPromocao":
-                update(request,response);
-                break;
-            case "/remocaoPromocao":
-                remove(request,response);
-                break;    
-            case "/cadastroPromocao":
-                apresentaForm(request,response);
-                break;
-            case "/edicaoPromocao":
-                apresentaFormEdicao(request,response);
-                break;
-            default:
-                lista(request,response);
-                
-        }
+         try {
+             String action = request.getServletPath();
+             switch(action){
+                 case "/insercaoPromocao":
+                     insere(request,response);
+                     break;
+                 case "/atualizacaoPromocao":
+                     update(request,response);
+                     break;
+                 case "/remocaoPromocao":
+                     remove(request,response);
+                     break;
+                 case "/cadastroPromocao":
+                     apresentaForm(request,response);
+                     break;
+                 case "/edicaoPromocao":
+                     apresentaFormEdicao(request,response);
+                     break;
+                 default:
+                     lista(request,response);
+                     
+             }} catch (ParseException ex) {
+             Logger.getLogger(PromocaoController.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
     public void apresentaForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -81,48 +88,56 @@ public class PromocaoController extends HttpServlet {
     
     }
     
-    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException{
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroPromocao.jsp");
         String url = request.getParameter("url");
         String CNPJ = request.getParameter("CNPJ");
-        Calendar calendar = parseDate(request.getParameter("horario"));
-        Date horario = calendar.getTime();
-        Promocao promocao = dao.getFromKey(url, CNPJ, (java.sql.Date)horario);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz YYYY");
+        String hor = request.getParameter("horario");
+        Date horario = dateFormat.parse(hor);
+        Promocao promocao = dao.getFromKey(url, CNPJ,horario);
         request.setAttribute("promocao",promocao);
         dispatcher.forward(request,response);
         
       //imcompleto  
     }
     
-    public void insere(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void insere(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
         String url = request.getParameter("url");
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
         float preco = parseFloat(request.getParameter("preco"));
-        Calendar calendar = parseDate(request.getParameter("horario"));
-        Date horario = calendar.getTime();
+       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String hor = request.getParameter("data");
+        hor += " " + request.getParameter("horario");
+        Date horario = dateFormat.parse(hor);      
         
         Promocao promocao = new Promocao(url,CNPJ,nome,preco,horario);
         dao.insert(promocao);
         response.sendRedirect("PromocaoController");
     }
     
-    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
         String url = request.getParameter("url");
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
         float preco = parseFloat(request.getParameter("preco"));
-        Calendar calendar = parseDate(request.getParameter("horario"));
-        Date horario = calendar.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String hor = request.getParameter("date");
+        hor += " " + request.getParameter("horario");
+        Date horario = dateFormat.parse(hor);      
         Promocao promocao = new Promocao(url,CNPJ,nome,preco,horario);
         dao.update(promocao);
         response.sendRedirect("PromocaoController");
     }
-   public void remove(HttpServletRequest request, HttpServletResponse response) throws IOException{
+   public void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
    //incompleto
    String url = request.getParameter("url");
    String CNPJ = request.getParameter("CNPJ");
-   Date horario = (Date) request.getAttribute("horario");
+   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+   String hor = request.getParameter("date");
+   hor += " " + request.getParameter("horario");
+   Date horario = dateFormat.parse(hor);      
    Promocao promocao = new Promocao();
    promocao.setHorario(horario);
    promocao.setCNPJ(CNPJ);

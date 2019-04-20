@@ -70,9 +70,17 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>Horário: </th>
+                            <th>Data: </th>
                             <td>
-                                <input type="text" name="horario" size="45" required
+                                <input type="date" name="data" size="45" required
+                                       value= "<c:out value='${promocao.horario}' />"
+                                       />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Horario: </th>
+                            <td>
+                                <input type="time" name="horario" size="45" required
                                        value= "<c:out value='${promocao.horario}' />"
                                        />
                             </td>
