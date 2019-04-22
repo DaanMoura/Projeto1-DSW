@@ -17,6 +17,7 @@ public class Promocao {
     private String nome;
     private float preco;
     private Date horario;
+    //private SiteVendas site;
 
     public Promocao(String url, String CNPJ, String nome, float preco, Date horario) {
         this.url = url;

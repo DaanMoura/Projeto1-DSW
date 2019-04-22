@@ -22,7 +22,6 @@
                 <th>CNPJ</th>
                 <th>Nome</th>
                 <th>Data</th>
-                <th>Horário</th>
                 <th>Preço</th>
                 <th>Ações</th>
           

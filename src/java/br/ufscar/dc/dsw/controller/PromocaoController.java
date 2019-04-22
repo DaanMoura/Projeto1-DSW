@@ -7,6 +7,7 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.PromocaoDAO;
 import br.ufscar.dc.dsw.model.Promocao;
+import br.ufscar.dc.dsw.model.SalaTeatro;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Float.parseFloat;
@@ -74,6 +75,9 @@ public class PromocaoController extends HttpServlet {
                  case "/edicaoPromocao":
                      apresentaFormEdicao(request,response);
                      break;
+                 case "/listaTeatro":
+                     listaTeatro(request,response);
+                     break;
                  default:
                      lista(request,response);
                      
@@ -110,8 +114,7 @@ public class PromocaoController extends HttpServlet {
        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String hor = request.getParameter("data");
         hor += " " + request.getParameter("horario");
-        Date horario = dateFormat.parse(hor);      
-        
+        Date horario = dateFormat.parse(hor);
         Promocao promocao = new Promocao(url,CNPJ,nome,preco,horario);
         dao.insert(promocao);
         response.sendRedirect("PromocaoController");
@@ -153,7 +156,29 @@ public class PromocaoController extends HttpServlet {
    RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocao.jsp");
    dispatcher.forward(request,response);
    }
-    
+   
+   public void listaTeatro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String CNPJ = request.getParameter("CNPJ");
+        List<Promocao> lista = dao.getFromCNPJ(CNPJ);
+        request.setAttribute("ListaPromocaoByTeatro", lista);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocaoByTeatro.jsp");
+        dispatcher.forward(request, response);
+    }
+   /*
+   public void listaByTeatro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+   //incompleto
+        String CNPJ = request.getParameter("CNPJ");
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String cidade = request.getParameter("cidade");
+   SalaTeatro sala = new SalaTeatro(CNPJ, email, senha, nome, cidade);
+   List<Promocao> listaByTeatro = dao.getBySala(sala);
+   request.setAttribute("ListaPromocaoByTeatro", listaByTeatro);
+   RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocaoByTeatro.jsp");
+   dispatcher.forward(request,response);
+   }
+   */ 
     /**
      * Handles the HTTP <code>POST</code> method.
      *

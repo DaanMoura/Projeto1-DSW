@@ -42,6 +42,7 @@
         <url-pattern>/atualizacaoPromocao</url-pattern>
         <url-pattern>/cadastroPromocao</url-pattern>
         <url-pattern>/edicaoPromocao</url-pattern>
+        <url-pattern>/listaTeatro</url-pattern>
     </servlet-mapping>
     
     <session-config>

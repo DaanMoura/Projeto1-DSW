@@ -6,6 +6,8 @@
 package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.model.Promocao;
+import br.ufscar.dc.dsw.model.SalaTeatro;
+import br.ufscar.dc.dsw.model.SiteVendas;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.sql.DriverManager;
@@ -16,6 +18,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -116,7 +120,8 @@ public class PromocaoDAO {
           String nome = resultSet.getString("nome");
           float preco = resultSet.getFloat("preco");
           Date horario = new Date(resultSet.getTimestamp("horario").getTime());
-
+         
+          
           Promocao promocao = new Promocao(url, cnpj, nome, preco, horario);
           promocoes.add(promocao);
         }
@@ -127,6 +132,61 @@ public class PromocaoDAO {
       }
 
       return promocoes;
+    }
+    /*
+    public List<Promocao> getBySala(SalaTeatro sala) {
+      List<Promocao> promocoes = new ArrayList<>();
+
+      try {
+            Connection conn = this.getConnection();
+            PreparedStatement stmt;
+            stmt = conn.prepareStatement("select CNPJ, nome"
+            + " from SalaTeatro as c where c.CNPJ = ? order by CNPJ");
+            stmt.setString(1, sala.getCNPJ());
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                String url = res.getString(1);
+                String CNPJ = res.getString(2);
+                String nome = res.getString(3);
+                float preco = res.getFloat(4);
+                Date horario = new Date(res.getTimestamp("horario").getTime());
+                
+                promocoes.add(new Promocao(url, CNPJ, nome, preco, horario, sala));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return promocoes;
+    }
+    */
+    public List<Promocao> getFromCNPJ(String CNPJ){
+
+            List<Promocao> promocoes = new ArrayList<>();
+            String sql = "SELECT * FROM Promocao WHERE CNPJ = ?";
+             try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1,CNPJ);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                String url = resultSet.getString("url");
+                String cnpj = resultSet.getString("cnpj");
+                String nome = resultSet.getString("nome");
+                float preco = resultSet.getFloat("preco");
+                Date horario = new Date(resultSet.getTimestamp("horario").getTime());
+
+                Promocao promocao = new Promocao(url, cnpj, nome, preco, horario);
+                promocoes.add(promocao);
+            }
+                 resultSet.close();
+                 conn.close();
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return promocoes; 
     }
 
     //QUESTION: terá um get específico?
