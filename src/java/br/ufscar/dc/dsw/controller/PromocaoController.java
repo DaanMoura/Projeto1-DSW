@@ -11,6 +11,7 @@ import br.ufscar.dc.dsw.model.SalaTeatro;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Float.parseFloat;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -54,7 +55,7 @@ public class PromocaoController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          try {
@@ -81,9 +82,11 @@ public class PromocaoController extends HttpServlet {
                  default:
                      lista(request,response);
                      
-             }} catch (ParseException ex) {
+             }
+         
+         }catch(SQLException ex) {
              Logger.getLogger(PromocaoController.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            }
     }
 
     public void apresentaForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -106,7 +109,7 @@ public class PromocaoController extends HttpServlet {
       //imcompleto  
     }
     
-    public void insere(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
+    public void insere(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException, SQLException, ServletException{
         String url = request.getParameter("url");
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
@@ -115,9 +118,16 @@ public class PromocaoController extends HttpServlet {
         String hor = request.getParameter("data");
         hor += " " + request.getParameter("horario");
         Date horario = dateFormat.parse(hor);
+        if(dao.checkValidity(url, CNPJ, horario)){
         Promocao promocao = new Promocao(url,CNPJ,nome,preco,horario);
         dao.insert(promocao);
         response.sendRedirect("PromocaoController");
+        }
+        else{
+        RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroPromocao.jsp");
+        request.setAttribute("mensagem_insercao",true);
+        dispatcher.forward(request, response);
+        }
     }
     
     public void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
@@ -164,21 +174,6 @@ public class PromocaoController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocaoByTeatro.jsp");
         dispatcher.forward(request, response);
     }
-   /*
-   public void listaByTeatro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-   //incompleto
-        String CNPJ = request.getParameter("CNPJ");
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        String cidade = request.getParameter("cidade");
-   SalaTeatro sala = new SalaTeatro(CNPJ, email, senha, nome, cidade);
-   List<Promocao> listaByTeatro = dao.getBySala(sala);
-   request.setAttribute("ListaPromocaoByTeatro", listaByTeatro);
-   RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocaoByTeatro.jsp");
-   dispatcher.forward(request,response);
-   }
-   */ 
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -187,7 +182,7 @@ public class PromocaoController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request,response);
@@ -198,7 +193,7 @@ public class PromocaoController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    @Override
+    
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>

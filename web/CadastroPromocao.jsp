@@ -95,5 +95,10 @@
                     </tr>
                 </form>
                 </div>
+                                       <c:if test='${mensagem_insercao}'>
+                                           <script>
+                                               alert("O cadastro falhou pois o teatro e/ou o site já possuem promocao neste horário");
+                                               </script>
+                                           </c:if>
                 </body>
 </html>

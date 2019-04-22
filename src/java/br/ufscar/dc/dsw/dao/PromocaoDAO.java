@@ -79,6 +79,28 @@ public class PromocaoDAO {
         throw new RuntimeException(e);
       }
     }
+    
+    public boolean checkValidity(String url,String CNPJ,Date horario) throws SQLException{
+        String sql = "SELECT * FROM Promocao WHERE (url = ? AND horario = ?) OR (CNPJ = ? AND horario = ?)";
+        try{
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,url);
+        statement.setString(3,CNPJ);
+        statement.setTimestamp(2, new Timestamp(horario.getTime()));
+        statement.setTimestamp(4, new Timestamp(horario.getTime()));
+        ResultSet resultSet = statement.executeQuery();
+        if(resultSet.next()){
+            return false;
+            }
+        else{
+            return true;
+        }
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 
     public Promocao getFromKey(String url,String CNPJ,Date horario){
         Promocao promocao = new Promocao();
@@ -133,35 +155,9 @@ public class PromocaoDAO {
 
       return promocoes;
     }
-    /*
-    public List<Promocao> getBySala(SalaTeatro sala) {
-      List<Promocao> promocoes = new ArrayList<>();
 
-      try {
-            Connection conn = this.getConnection();
-            PreparedStatement stmt;
-            stmt = conn.prepareStatement("select CNPJ, nome"
-            + " from SalaTeatro as c where c.CNPJ = ? order by CNPJ");
-            stmt.setString(1, sala.getCNPJ());
-            ResultSet res = stmt.executeQuery();
-
-            while (res.next()) {
-                String url = res.getString(1);
-                String CNPJ = res.getString(2);
-                String nome = res.getString(3);
-                float preco = res.getFloat(4);
-                Date horario = new Date(res.getTimestamp("horario").getTime());
-                
-                promocoes.add(new Promocao(url, CNPJ, nome, preco, horario, sala));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return promocoes;
-    }
-    */
     public List<Promocao> getFromCNPJ(String CNPJ){
-
+       
             List<Promocao> promocoes = new ArrayList<>();
             String sql = "SELECT * FROM Promocao WHERE CNPJ = ?";
              try {
@@ -181,8 +177,6 @@ public class PromocaoDAO {
             }
                  resultSet.close();
                  conn.close();
-
-
         } catch (SQLException ex) {
             Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

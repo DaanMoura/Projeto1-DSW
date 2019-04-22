@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 public class SiteVendasController extends HttpServlet {
     private SiteVendasDAO dao;
     
-    @Override
     public void init(){
     dao = new SiteVendasDAO();
     }
@@ -51,10 +50,9 @@ public class SiteVendasController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+    doGet(request, response);
     }
 
     /**
@@ -65,7 +63,6 @@ public class SiteVendasController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getServletPath();
@@ -138,7 +135,6 @@ public class SiteVendasController extends HttpServlet {
        dao.update(site);
        response.sendRedirect("admin");
    }
-    @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
