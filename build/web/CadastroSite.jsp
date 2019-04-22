@@ -7,8 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <f:bundle basename="i18n.mensagens">
 <!DOCTYPE html>
+<sec:authorize access="hasRole('ADMIN')">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,6 +29,9 @@
                 </c:if>
                 <form name="form">
                     <table border="1" cellpadding="5">
+                        <input type="hidden"
+                               name="${_csrf.parameterName}"
+                               value="${_csrf.token}"/> 
                         <caption>
                             <h2>
                                 <c:if test="${site != null}">
@@ -90,5 +95,6 @@
                 </form>
                 </div>
                 </body>
+</sec:authorize>
 </f:bundle>
                 </html>

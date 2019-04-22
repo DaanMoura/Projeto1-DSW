@@ -9,9 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class SiteVendasDAO {
 
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     public SiteVendasDAO() {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -23,8 +25,30 @@ public class SiteVendasDAO {
     protected Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/VendaIngressoBD", "root", "root");
     }
-
+    public void insertUsuario(String email,String senha) throws SQLException{
+    String sql = "INSERT INTO Usuario (email,senha,ativo) VALUES (?,?,?)";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,email);
+        statement.setString(2,encoder.encode(senha));
+        statement.setBoolean(3,true);
+        statement.execute();
+        statement.close();
+        conn.close();        
+    }
+    public void insertPapel(String email) throws SQLException{
+        String sql = "INSERT INTO Papel (email,nome) VALUES (?,?)";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,email);
+        statement.setString(2,"ROLE_SITE");
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
     public void insert(SiteVendas site) throws SQLException{
+        insertUsuario(site.getEmail(),site.getSenha());
+        insertPapel(site.getEmail());
         String sql = "INSERT INTO SiteVendas "
                 + "(url, email, senha, nome, telefone) "
                 + "VALUES (?, ?, ?, ?, ?)";
