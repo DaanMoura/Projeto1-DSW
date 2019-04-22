@@ -33,12 +33,12 @@ public class SalaTeatroDAO {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/VendaIngressoBD", "root", "root");
     }
     
-    public void insert(SalaTeatro sala) {
+    public void insert(SalaTeatro sala) throws SQLException {
         String sql = "INSERT INTO SalaTeatro "
                 + "(CNPJ, email, senha, nome, cidade) "
                 + "VALUES (?, ?, ?, ?, ?)";
         
-        try {
+    
             Connection conn = this.getConnection();
             PreparedStatement statement =  conn.prepareStatement(sql);
             
@@ -50,16 +50,14 @@ public class SalaTeatroDAO {
             statement.executeUpdate();
             statement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        
     }
     
-    public List<SalaTeatro> getAll() {
+    public List<SalaTeatro> getAll()throws SQLException {
         List<SalaTeatro> salas = new ArrayList<>();
         String sql = "SELECT * FROM SalaTeatro";
         
-        try {
+
             Connection conn = this.getConnection();
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -75,16 +73,14 @@ public class SalaTeatroDAO {
             }
             resultSet.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        
         
         return salas;
     }
     
-    public void delete(SalaTeatro sala) {
+    public void delete(SalaTeatro sala) throws SQLException{
         String sql = "DELETE FROM SalaTeatro WHERE CNPJ = ?";
-        try {
+ 
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             
@@ -92,19 +88,17 @@ public class SalaTeatroDAO {
             statement.executeUpdate();
             statement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        
     }
     
-    public void update(SalaTeatro sala) {
+    public void update(SalaTeatro sala) throws SQLException {
         String sql = "UPDATE SalaTeatro SET "
                 + "email = ?, "
                 + "senha = ?, "
                 + "nome = ?, "
                 + "cidade = ? "
                 + "WHERE CNPJ = ?";
-        try {
+
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, sala.getEmail());
@@ -116,16 +110,14 @@ public class SalaTeatroDAO {
             
             statement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+       
     }
     
-    public SalaTeatro getFromCnpj(String CNPJ) {
+    public SalaTeatro getFromCnpj(String CNPJ) throws SQLException{
         SalaTeatro sala = null;
         String sql = "SELECT * FROM SalaTeatro WHERE CNPJ = ?";
         
-        try {
+
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, CNPJ);
@@ -142,18 +134,15 @@ public class SalaTeatroDAO {
             resultSet.close();
             statement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+       
         
         return sala;
     }
     
-    public List<SalaTeatro> getFromCity(String cidade) {
+    public List<SalaTeatro> getFromCity(String cidade) throws SQLException {
         List<SalaTeatro> salas = new ArrayList<>();
         String sql = "SELECT * FROM SalaTeatro "
                 + "WHERE cidade = ?";
-        try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             
@@ -172,9 +161,7 @@ public class SalaTeatroDAO {
             resultSet.close();
             statement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+       
         
         return salas;
     }

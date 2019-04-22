@@ -38,12 +38,11 @@ public class PromocaoDAO {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/VendaIngressoBD", "root", "root");
     }
     
-    public void insert(Promocao promocao) {
+    public void insert(Promocao promocao) throws SQLException{
         String sql = "INSERT INTO Promocao "
                 + "(url, CNPJ, nome, preco, horario) "
                 + "VALUES (?, ?, ?, ?, ?)";
         
-        try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             
@@ -56,15 +55,11 @@ public class PromocaoDAO {
             statement.executeUpdate();
             statement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
-    public void delete(Promocao promocao) {
+    public void delete(Promocao promocao)throws SQLException{
       String sql = "DELETE FROM Promocao WHERE "
             + "url = ? AND CNPJ = ? AND horario = ?";
-      try {
         Connection conn = this.getConnection();
         PreparedStatement statement = conn.prepareStatement(sql);
         
@@ -75,9 +70,6 @@ public class PromocaoDAO {
         statement.executeUpdate();
         statement.close();
         conn.close();
-      } catch (SQLException e) {
-        throw new RuntimeException(e);
-      }
     }
     
     public boolean checkValidity(String url,String CNPJ,Date horario) throws SQLException{
@@ -102,10 +94,10 @@ public class PromocaoDAO {
         }
     }
 
-    public Promocao getFromKey(String url,String CNPJ,Date horario){
+    public Promocao getFromKey(String url,String CNPJ,Date horario)throws SQLException{
         Promocao promocao = new Promocao();
         String sql = "SELECT * FROM Promocao WHERE url = ? AND CNPJ = ? AND horario = ?";
-        try{
+
         Connection conn = this.getConnection();
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1,url);
@@ -121,18 +113,15 @@ public class PromocaoDAO {
         promocao.setNome(nome);
         promocao.setPreco(preco);
         }
-        }
-        catch(SQLException e){
-            throw new RuntimeException(e);
-        }
+        
         return promocao;
     }
     
-    public List<Promocao> getAll() {
+    public List<Promocao> getAll()throws SQLException {
       List<Promocao> promocoes = new ArrayList<>();
       String sql = "SELECT * FROM Promocao";
 
-      try {
+
         Connection conn = this.getConnection();
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -149,18 +138,14 @@ public class PromocaoDAO {
         }
         resultSet.close();
         conn.close();
-      } catch (SQLException e) {
-        throw new RuntimeException(e);
-      }
 
       return promocoes;
     }
 
-    public List<Promocao> getFromCNPJ(String CNPJ){
+    public List<Promocao> getFromCNPJ(String CNPJ)throws SQLException{
        
             List<Promocao> promocoes = new ArrayList<>();
             String sql = "SELECT * FROM Promocao WHERE CNPJ = ?";
-             try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1,CNPJ);
@@ -177,19 +162,17 @@ public class PromocaoDAO {
             }
                  resultSet.close();
                  conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
          return promocoes; 
     }
 
     //QUESTION: terá um get específico?
     
-    public void update(Promocao promocao) {
+    public void update(Promocao promocao) throws SQLException{
       String sql = "UPDATE Promocao SET "
               + "nome = ?, preco = ? "
               + "WHERE url = ? AND CNPJ = ? AND horario = ?";
-      try {
+
         Connection conn = this.getConnection();
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, promocao.getNome());
@@ -201,8 +184,6 @@ public class PromocaoDAO {
 
         statement.close();
         conn.close();
-      } catch (SQLException e) {
-        throw new RuntimeException(e);
-      }
+     
     }
 }

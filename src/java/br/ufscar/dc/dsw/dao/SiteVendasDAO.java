@@ -24,12 +24,12 @@ public class SiteVendasDAO {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/VendaIngressoBD", "root", "root");
     }
 
-    public void insert(SiteVendas site) {
+    public void insert(SiteVendas site) throws SQLException{
         String sql = "INSERT INTO SiteVendas "
                 + "(url, email, senha, nome, telefone) "
                 + "VALUES (?, ?, ?, ?, ?)";
 
-        try {
+        
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -41,17 +41,13 @@ public class SiteVendasDAO {
             statement.executeUpdate();
             statement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
-    public List<SiteVendas> getAll() {
+    public List<SiteVendas> getAll() throws SQLException {
       List<SiteVendas> sites = new ArrayList<>();
       String sql = "SELECT * FROM SiteVendas";
 
-      try {
         Connection conn = this.getConnection();
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -67,19 +63,17 @@ public class SiteVendasDAO {
         }
         resultSet.close();
         conn.close();
-      } catch (SQLException e) {
-        throw new RuntimeException(e);
-      }
+    
       
       return sites;
     }
 
-    public SiteVendas getFromURL(String url) {
+    public SiteVendas getFromURL(String url) throws SQLException {
         SiteVendas site = null;
         String sql = "SELECT * FROM SiteVendas "
                 + "WHERE url = ?";
 
-        try {
+        
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             
@@ -98,14 +92,12 @@ public class SiteVendasDAO {
             statement.close();
             conn.close();
            
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+       
         
         return site;
     }
 
-    public void update(SiteVendas site) {
+    public void update(SiteVendas site) throws SQLException {
         String sql = "UPDATE SiteVendas SET "
                 + "email = ?, "
                 + "senha = ?, "
@@ -113,7 +105,7 @@ public class SiteVendasDAO {
                 + "telefone = ? "
                 + "WHERE url = ?";
         
-        try {
+       
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             
@@ -126,15 +118,13 @@ public class SiteVendasDAO {
             
             statement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+       
     }
     
-    public void delete(SiteVendas site) {
+    public void delete(SiteVendas site) throws SQLException{
         String sql = "DELETE FROM SiteVendas where url = ?";
         
-        try {
+        
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             
@@ -143,8 +133,6 @@ public class SiteVendasDAO {
             
             statement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+       
     }
 }

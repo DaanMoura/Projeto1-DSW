@@ -9,7 +9,10 @@ import br.ufscar.dc.dsw.dao.SalaTeatroDAO;
 import br.ufscar.dc.dsw.model.SalaTeatro;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +47,8 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
      * @throws IOException if an I/O error occurs
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException {
+    try {
         String action = request.getServletPath();
         switch(action){
             case "/cadastroTeatro":
@@ -67,10 +71,13 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
                 lista(request,response);
         
         }
+    } catch (IOException |SQLException |ServletException e) {
+        throw new ServletException(e);
+    }
     }
 
     
-    public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
         List<SalaTeatro> lista = dao.getAll();
         request.setAttribute("ListaTeatros", lista);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ListaTeatros.jsp");
@@ -82,7 +89,7 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroTeatro.jsp");
         dispatcher.forward(request,response);
     }
-    public void apresentaFormEdicao(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
+    public void apresentaFormEdicao(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException, SQLException{
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroTeatro.jsp");
         String CNPJ = request.getParameter("CNPJ");
         SalaTeatro sala = dao.getFromCnpj(CNPJ);
@@ -90,7 +97,7 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
         dispatcher.forward(request, response);
     }
     
-    public void insere(HttpServletRequest request,HttpServletResponse response) throws IOException{
+    public void insere(HttpServletRequest request,HttpServletResponse response) throws IOException, SQLException{
         String CNPJ = request.getParameter("CNPJ");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
@@ -102,14 +109,14 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
         response.sendRedirect("SalaTeatroController");
     }
     
-    public void remove(HttpServletRequest request,HttpServletResponse response) throws IOException{
+    public void remove(HttpServletRequest request,HttpServletResponse response) throws IOException, SQLException{
         String CNPJ = request.getParameter("CNPJ");
         SalaTeatro sala = dao.getFromCnpj(CNPJ);
         dao.delete(sala);
         response.sendRedirect("SalaTeatroController");
     }
     
-    public void update(HttpServletRequest request,HttpServletResponse response) throws IOException{
+    public void update(HttpServletRequest request,HttpServletResponse response) throws IOException, SQLException{
         String CNPJ = request.getParameter("CNPJ");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");

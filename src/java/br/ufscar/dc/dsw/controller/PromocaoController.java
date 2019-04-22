@@ -84,8 +84,8 @@ public class PromocaoController extends HttpServlet {
                      
              }
          
-         }catch(SQLException ex) {
-             Logger.getLogger(PromocaoController.class.getName()).log(Level.SEVERE, null, ex);
+         }catch(SQLException | IOException | ParseException | ServletException e) {
+             throw new ServletException(e);
             }
     }
 
@@ -95,7 +95,7 @@ public class PromocaoController extends HttpServlet {
     
     }
     
-    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException{
+    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException, SQLException{
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroPromocao.jsp");
         String url = request.getParameter("url");
         String CNPJ = request.getParameter("CNPJ");
@@ -130,7 +130,7 @@ public class PromocaoController extends HttpServlet {
         }
     }
     
-    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
+    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException, SQLException{
         String url = request.getParameter("url");
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
@@ -142,7 +142,7 @@ public class PromocaoController extends HttpServlet {
         dao.update(promocao);
         response.sendRedirect("PromocaoController");
     }
-   public void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException{
+   public void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException, SQLException{
    //incompleto
    String url = request.getParameter("url");
    String CNPJ = request.getParameter("CNPJ");
@@ -159,7 +159,7 @@ public class PromocaoController extends HttpServlet {
 
    }
    
-   public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+   public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
    //incompleto
    List<Promocao> lista = dao.getAll();
    request.setAttribute("ListaPromocao", lista);
@@ -167,7 +167,7 @@ public class PromocaoController extends HttpServlet {
    dispatcher.forward(request,response);
    }
    
-   public void listaTeatro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+   public void listaTeatro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
         String CNPJ = request.getParameter("CNPJ");
         List<Promocao> lista = dao.getFromCNPJ(CNPJ);
         request.setAttribute("ListaPromocaoByTeatro", lista);

@@ -9,8 +9,11 @@ import br.ufscar.dc.dsw.dao.SiteVendasDAO;
 import br.ufscar.dc.dsw.model.SiteVendas;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,30 +67,34 @@ public class SiteVendasController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String action = request.getServletPath();
-        switch(action){
-            case "/cadastro":
-                apresentaForm(request,response);
-                break;
-            case "/edicao":
-                apresentaFormEdicao(request,response);
-            case "/insercao":
-                insere(request,response);
-                break;
-            case "/remocao":
-                remove(request,response);
-                break;
-            case "/atualizacao":
-                update(request,response);
-                break;
-            default:
-                lista(request,response);
-                                      
+            throws ServletException {
+        try {
+            String action = request.getServletPath();
+            switch(action){
+                case "/cadastro":
+                    apresentaForm(request,response);
+                    break;
+                case "/edicao":
+                    apresentaFormEdicao(request,response);
+                case "/insercao":
+                    insere(request,response);
+                    break;
+                case "/remocao":
+                    remove(request,response);
+                    break;
+                case "/atualizacao":
+                    update(request,response);
+                    break;
+                default:
+                    lista(request,response);
+                    
+            }
+        } catch (IOException |SQLException|ServletException e) {
+            throw new ServletException(e);
         }
     }
 
-    public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
         List<SiteVendas> lista = dao.getAll();
         request.setAttribute("ListaSites", lista);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ListaSites.jsp");
@@ -98,7 +105,7 @@ public class SiteVendasController extends HttpServlet {
         dispatcher.forward(request,response);
     }
     
-    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
+    public void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException, SQLException{
         String url = request.getParameter("url");
         SiteVendas site = dao.getFromURL(url);
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroSite.jsp");
@@ -106,7 +113,7 @@ public class SiteVendasController extends HttpServlet {
         dispatcher.forward(request,response);       
     }
     
-   public void insere(HttpServletRequest request, HttpServletResponse response)throws IOException{
+   public void insere(HttpServletRequest request, HttpServletResponse response)throws IOException, SQLException{
        String url = request.getParameter("url");
        String email = request.getParameter("email");
        String senha = request.getParameter("senha");
@@ -117,7 +124,7 @@ public class SiteVendasController extends HttpServlet {
        dao.insert(site);
        response.sendRedirect("admin");
    }
-   public void remove(HttpServletRequest request, HttpServletResponse response)throws IOException{
+   public void remove(HttpServletRequest request, HttpServletResponse response)throws IOException, SQLException{
        String url = request.getParameter("url");
        SiteVendas site = new SiteVendas();
        site.setUrl(url);
@@ -125,7 +132,7 @@ public class SiteVendasController extends HttpServlet {
        response.sendRedirect("admin");
    }
    
-   public void update(HttpServletRequest request, HttpServletResponse response)throws IOException{
+   public void update(HttpServletRequest request, HttpServletResponse response)throws IOException, SQLException{
        String url = request.getParameter("url");
        String email = request.getParameter("email");
        String senha = request.getParameter("senha");
