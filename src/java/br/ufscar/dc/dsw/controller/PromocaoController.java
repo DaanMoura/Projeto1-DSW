@@ -75,6 +75,9 @@ public class PromocaoController extends HttpServlet {
                  case "/edicaoPromocao":
                      apresentaFormEdicao(request,response);
                      break;
+                 case "/listaTeatro":
+                     listaTeatro(request,response);
+                     break;
                  default:
                      lista(request,response);
                      
@@ -83,6 +86,13 @@ public class PromocaoController extends HttpServlet {
          } catch (SQLException ex) {
              Logger.getLogger(PromocaoController.class.getName()).log(Level.SEVERE, null, ex);
          }
+    }
+    public void listaTeatro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String CNPJ = request.getParameter("CNPJ");
+        List<Promocao> lista = dao.getFromCNPJ(CNPJ);
+        request.setAttribute("ListaPromocao", lista);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocaoByTeatro.jsp");
+        dispatcher.forward(request, response);
     }
 
     public void apresentaForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
