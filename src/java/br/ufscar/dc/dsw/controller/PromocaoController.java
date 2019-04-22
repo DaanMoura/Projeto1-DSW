@@ -7,6 +7,7 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.PromocaoDAO;
 import br.ufscar.dc.dsw.model.Promocao;
+import br.ufscar.dc.dsw.model.SalaTeatro;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Float.parseFloat;
@@ -54,7 +55,7 @@ public class PromocaoController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          try {
@@ -75,14 +76,17 @@ public class PromocaoController extends HttpServlet {
                  case "/edicaoPromocao":
                      apresentaFormEdicao(request,response);
                      break;
+                 case "/listaTeatro":
+                     listaTeatro(request,response);
+                     break;
                  default:
                      lista(request,response);
                      
-             }} catch (ParseException ex) {
+             }
+         
+         }catch(SQLException ex) {
              Logger.getLogger(PromocaoController.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (SQLException ex) {
-             Logger.getLogger(PromocaoController.class.getName()).log(Level.SEVERE, null, ex);
-         }
+            }
     }
 
     public void apresentaForm(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -113,7 +117,7 @@ public class PromocaoController extends HttpServlet {
        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String hor = request.getParameter("data");
         hor += " " + request.getParameter("horario");
-        Date horario = dateFormat.parse(hor);      
+        Date horario = dateFormat.parse(hor);
         if(dao.checkValidity(url, CNPJ, horario)){
         Promocao promocao = new Promocao(url,CNPJ,nome,preco,horario);
         dao.insert(promocao);
@@ -162,7 +166,14 @@ public class PromocaoController extends HttpServlet {
    RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocao.jsp");
    dispatcher.forward(request,response);
    }
-    
+   
+   public void listaTeatro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String CNPJ = request.getParameter("CNPJ");
+        List<Promocao> lista = dao.getFromCNPJ(CNPJ);
+        request.setAttribute("ListaPromocaoByTeatro", lista);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocaoByTeatro.jsp");
+        dispatcher.forward(request, response);
+    }
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -171,7 +182,7 @@ public class PromocaoController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request,response);
@@ -182,7 +193,7 @@ public class PromocaoController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    @Override
+    
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>

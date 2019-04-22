@@ -6,6 +6,8 @@
 package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.model.Promocao;
+import br.ufscar.dc.dsw.model.SalaTeatro;
+import br.ufscar.dc.dsw.model.SiteVendas;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.sql.DriverManager;
@@ -140,7 +142,8 @@ public class PromocaoDAO {
           String nome = resultSet.getString("nome");
           float preco = resultSet.getFloat("preco");
           Date horario = new Date(resultSet.getTimestamp("horario").getTime());
-
+         
+          
           Promocao promocao = new Promocao(url, cnpj, nome, preco, horario);
           promocoes.add(promocao);
         }
@@ -152,7 +155,7 @@ public class PromocaoDAO {
 
       return promocoes;
     }
-    
+
     public List<Promocao> getFromCNPJ(String CNPJ){
        
             List<Promocao> promocoes = new ArrayList<>();
@@ -174,8 +177,6 @@ public class PromocaoDAO {
             }
                  resultSet.close();
                  conn.close();
-                 
-            
         } catch (SQLException ex) {
             Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
