@@ -165,6 +165,29 @@ public class PromocaoDAO {
 
          return promocoes; 
     }
+   public List<Promocao> getFromURL(String url)throws SQLException{
+       
+            List<Promocao> promocoes = new ArrayList<>();
+            String sql = "SELECT * FROM Promocao WHERE url = ?";
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1,url);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                String URL = resultSet.getString("url");
+                String cnpj = resultSet.getString("cnpj");
+                String nome = resultSet.getString("nome");
+                float preco = resultSet.getFloat("preco");
+                Date horario = new Date(resultSet.getTimestamp("horario").getTime());
+
+                Promocao promocao = new Promocao(url, cnpj, nome, preco, horario);
+                promocoes.add(promocao);
+            }
+                 resultSet.close();
+                 conn.close();
+
+         return promocoes; 
+    }
 
     //QUESTION: terá um get específico?
     
