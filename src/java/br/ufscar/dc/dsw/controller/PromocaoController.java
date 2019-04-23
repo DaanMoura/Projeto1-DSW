@@ -79,6 +79,9 @@ public class PromocaoController extends HttpServlet {
                  case "/listaTeatro":
                      listaTeatro(request,response);
                      break;
+                 case "/listaBySite":
+                     listaBySite(request, response);
+                     break;
                  default:
                      lista(request,response);
                      
@@ -172,6 +175,14 @@ public class PromocaoController extends HttpServlet {
         List<Promocao> lista = dao.getFromCNPJ(CNPJ);
         request.setAttribute("ListaPromocaoByTeatro", lista);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocaoByTeatro.jsp");
+        dispatcher.forward(request, response);
+    }
+   
+   public void listaBySite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+        String url = request.getParameter("url");
+        List<Promocao> lista = dao.getFromURL(url);
+        request.setAttribute("ListaPromocaoBySite", lista);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaPromocaoBySite.jsp");
         dispatcher.forward(request, response);
     }
     /**

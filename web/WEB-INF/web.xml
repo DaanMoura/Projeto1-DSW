@@ -43,6 +43,7 @@
         <url-pattern>/cadastroPromocao</url-pattern>
         <url-pattern>/edicaoPromocao</url-pattern>
         <url-pattern>/listaTeatro</url-pattern>
+        <url-pattern>/listaBySite</url-pattern>
     </servlet-mapping>
     
     <error-page>
