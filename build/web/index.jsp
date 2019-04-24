@@ -2,15 +2,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@include file="base/top.jsp" %>
 <f:bundle basename="i18n.mensagens">
-<!DOCTYPE html>
-<html>
-     <head>
-        <title>Site de Vendas</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
+
         <center>
         <h1><f:message key="avaliacao.title" /></h1>
 		
@@ -44,6 +38,8 @@
                         </div>
             
         </center>
-    </body>
 </f:bundle>
-</html>
+<%@include file="base/bottom.jsp" %>
+
+
+
