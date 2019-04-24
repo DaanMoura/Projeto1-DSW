@@ -41,6 +41,9 @@
                         </td><br>
                     </tr><br>
                     <table border="1" cellpadding="5">
+                        <input type="hidden"
+                               name="${_csrf.parameterName}"
+                               value="${_csrf.token}"/> 
                         <tr>
                             <th><f:message key="url.label" /></th>
                             <th><f:message key="name.label" /></th>

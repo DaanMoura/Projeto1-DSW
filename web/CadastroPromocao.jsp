@@ -36,7 +36,7 @@
                                     <input type="hidden" name="horario" value="<c:out value='${promocao.horario}'/>"/>                                
                                 </c:if>
                                 <c:if test="${promocao == null}">
-                                    <f:message key="edit.title" />    
+                                    Cadastro<f:message key="edit.title" />    
                                     <tr>
                                         <th><f:message key="url.label" /> </th>
                                         <td>

@@ -22,6 +22,8 @@
             <tr>
                 <th><f:message key="url.label" /></th>
                 <th><f:message key="name.label" /></th>
+                <th><f:message key="email.label" /></th>
+                <th><f:message key="password.label" /></th>
                 <th><f:message key="phone.label" /></th>
                 <th><f:message key="action.label" /></th>
           
@@ -30,6 +32,8 @@
                 <tr>
                     <td><c:out value="${site.url}" /></td>
                     <td><c:out value="${site.nome}" /></td>
+                    <td><c:out value="${site.email}"/></td>
+                    <td><c:out value="${site.senha}"/></td>
                     <td><c:out value="${site.telefone}" /></td>
                   
                     <td>
