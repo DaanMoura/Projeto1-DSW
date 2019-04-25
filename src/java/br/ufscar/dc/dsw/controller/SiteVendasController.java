@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 743509
  */
-@WebServlet( urlPatterns = {"/admin"})
+@WebServlet( urlPatterns = {"/sites"})
 public class SiteVendasController extends HttpServlet {
     private SiteVendasDAO dao;
     
@@ -71,18 +71,18 @@ public class SiteVendasController extends HttpServlet {
         try {
             String action = request.getServletPath();
             switch(action){
-                case "/cadastro":
+                case "/cadastroSite":
                     apresentaForm(request,response);
                     break;
-                case "/edicao":
+                case "/edicaoSite":
                     apresentaFormEdicao(request,response);
-                case "/insercao":
+                case "/insercaoSite":
                     insere(request,response);
                     break;
-                case "/remocao":
+                case "/remocaoSite":
                     remove(request,response);
                     break;
-                case "/atualizacao":
+                case "/atualizacaoSite":
                     update(request,response);
                     break;
                 default:
@@ -122,14 +122,14 @@ public class SiteVendasController extends HttpServlet {
        
        SiteVendas site = new SiteVendas(url,email,senha,nome,telefone);
        dao.insert(site);
-       response.sendRedirect("admin");
+       response.sendRedirect("sites");
    }
    public void remove(HttpServletRequest request, HttpServletResponse response)throws IOException, SQLException{
        String url = request.getParameter("url");
        SiteVendas site = new SiteVendas();
        site.setUrl(url);
        dao.delete(site);
-       response.sendRedirect("admin");
+       response.sendRedirect("sites");
    }
    
    public void update(HttpServletRequest request, HttpServletResponse response)throws IOException, SQLException{
@@ -140,7 +140,7 @@ public class SiteVendasController extends HttpServlet {
        String telefone = request.getParameter("telefone");
        SiteVendas site = new SiteVendas(url,email,senha,nome,telefone);
        dao.update(site);
-       response.sendRedirect("admin");
+       response.sendRedirect("sites");
    }
     public String getServletInfo() {
         return "Short description";

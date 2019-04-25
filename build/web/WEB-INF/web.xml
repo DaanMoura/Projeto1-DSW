@@ -19,11 +19,11 @@
     
     <servlet-mapping>
         <servlet-name>SiteVendasController</servlet-name>
-        <url-pattern>/insercao</url-pattern>
-        <url-pattern>/remocao</url-pattern>
-        <url-pattern>/atualizacao</url-pattern>
-        <url-pattern>/cadastro</url-pattern>
-        <url-pattern>/edicao</url-pattern>
+        <url-pattern>/insercaoSite</url-pattern>
+        <url-pattern>/remocaoSite</url-pattern>
+        <url-pattern>/atualizacaoSite</url-pattern>
+        <url-pattern>/cadastroSite</url-pattern>
+        <url-pattern>/edicaoSite</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>

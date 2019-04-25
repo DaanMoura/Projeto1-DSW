@@ -48,7 +48,6 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .and()
-                .anonymous(); //Tentando ir para index depois de logout
+                .logoutSuccessUrl("/"); //Tentando ir para index depois de logout
     }
 }
