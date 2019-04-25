@@ -13,9 +13,11 @@
             <div class="col-11">
                 <p class="lead"><f:message key="message.index"/></p>
             </div>
-            <div class="col-1">
-                <a href="/Avaliacao1/cadastroTeatro" class="btn btn-primary mr-2" role="button" aria-pressed="true">+</a>
-            </div>
+            <sec:authorize access="hasRole('ADMIN')">
+                <div class="col-1">
+                    <a href="/Avaliacao1/cadastroTeatro" class="btn btn-primary mr-2" role="button" aria-pressed="true">+</a>
+                </div>
+            </sec:authorize>
         </div>
         <%@include file="ListaTeatros.jsp" %>
     </div>

@@ -37,7 +37,7 @@
                                     <tr>
                                         <th><f:message key="cnpj.label" /> </th>
                                         <td>
-                                            <input type="text" name="CNPJ" size="45" 
+                                            <input  class="form-control" type="text" name="CNPJ" size="45" 
                                                    placeholder="xx.xxx.xxx/xxxx-xx" required
                                                    value= "<c:out value='${sala.CNPJ}' />"       
                                                    />
@@ -49,7 +49,7 @@
                         <tr>
                             <th><f:message key="name.label" />: </th>
                             <td>
-                                <input type="text" name="nome" size="45" required
+                                <input class="form-control" type="text" name="nome" size="45" required
                                        value= "<c:out value='${sala.nome}' />"
                                        />
                             </td><br>
@@ -57,7 +57,7 @@
                         <tr>
                             <th><f:message key="city.label" /> </th>
                             <td>
-                                <input type="text" name="cidade" size="45" required
+                                <input class="form-control" type="text" name="cidade" size="45" required
                                        value= "<c:out value='${sala.cidade}' />"       
                                        />
                             </td>
@@ -65,7 +65,7 @@
                         <tr>
                             <th><f:message key="email.label" />: </th>
                             <td>
-                                <input type="text" name="email" size="45" required
+                                <input class="form-control" type="text" name="email" size="45" required
                                        value= "<c:out value='${sala.email}' />"
                                        />
                             </td>
@@ -73,7 +73,7 @@
                         <tr>
                             <th><f:message key="password.label" /> </th>
                             <td>
-                                <input type="password" name="senha" size="45" required
+                                <input  class="form-control" type="password" name="senha" size="45" required
                                        value= "<c:out value='${sala.senha}' />"       
                                        />
                             </td>    

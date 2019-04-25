@@ -24,14 +24,11 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/Avaliacao1/"> Listar Teatros <span class="sr-only">(current)</span></a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Avaliacao1/"> Teatros <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/Avaliacao1/">Listar Teatros por Cidade</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Avaliacao1/">Listar Promocoes</a>
+                                <a class="nav-link" href="/Avaliacao1/">Promoções</a>
                             </li>
                         </ul>
                         <a href="/Avaliacao1/login" class="btn btn-primary ml-2" role="button" aria-pressed="true">Login</a>
@@ -66,30 +63,6 @@
                         <a href="/Avaliacao1/logout" class="btn btn-primary ml-2" role="button" aria-pressed="true">Logout</a>
 
 
-                    </div>
-                </nav>
-
-            </sec:authorize>
-
-            <sec:authorize access="hasRole('USER')">
-
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#"><f:message key="page.title"/></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
-                            </li>
-                        </ul>
                     </div>
                 </nav>
 

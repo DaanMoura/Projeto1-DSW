@@ -15,6 +15,17 @@
     <%@include file="base/top.jsp" %>
 
     <div class="container">
+        <h1 class="display-4">Sites</h1>
+        <div class="row">
+            <div class="col-11">
+                <p class="lead">See below a list of registered sites:</p>
+            </div>
+            <sec:authorize access="hasRole('ADMIN')">
+                <div class="col-1">
+                    <a href="/Avaliacao1/cadastroSite" class="btn btn-primary mr-2" role="button" aria-pressed="true">+</a>
+                </div>
+            </sec:authorize>
+        </div>
         <table class="table">
             <thead>
                 <tr>

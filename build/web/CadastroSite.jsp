@@ -31,14 +31,14 @@
                             <caption>
                                 <h2>
                                     <c:if test="${site != null}">
-                                        <input type="hidden" name="url" value="<c:out value='${site.url}' />" 
-                                               />
+                                        <input  class="form-control" type="hidden" name="url" value="<c:out value='${site.url}' />" 
+                                                />
                                     </c:if>
                                     <c:if test="${site == null}">
                                         <tr>
                                             <th><f:message key="url.label" />: </th>
                                             <td>
-                                                <input type="text" name="url" size="45" required
+                                                <input  class="form-control" type="text" name="url" size="45" required
                                                        value= "<c:out value='${site.url}' />"       
                                                        />
                                             </td>
@@ -49,23 +49,23 @@
                             <tr>
                                 <th><f:message key="name.label" /> </th>
                                 <td>
-                                    <input type="text" name="nome" size="45" required
-                                           value= "<c:out value='${site.nome}' />"
-                                           />
+                                    <input  class="form-control" type="text" name="nome" size="45" required
+                                            value= "<c:out value='${site.nome}' />"
+                                            />
                                 </td><br>
                             </tr>
                             <tr>
                                 <th><f:message key="email.label" /> </th>
                                 <td>
-                                    <input type="text" name="email" size="45" required
-                                           value= "<c:out value='${site.email}' />"
-                                           />
+                                    <input  class="form-control" type="text" name="email" size="45" required
+                                            value= "<c:out value='${site.email}' />"
+                                            />
                                 </td>
                             </tr>
                             <tr>
                                 <th><f:message key="password.label" /> </th>
                                 <td>
-                                    <input type="password" name="senha" size="45" required
+                                    <input class="form-control" type="password" name="senha" size="45" required
                                            value= "<c:out value='${site.senha}' />"       
                                            />
                                 </td>    
@@ -73,10 +73,10 @@
                             <tr>
                                 <th><f:message key="phone.label" /> </th>
                                 <td>
-                                    <input type="number" name="telefone" size="45"
-                                           placeholder="xxxxx-xxxx" required
-                                           value= "<c:out value='${site.telefone}' />"       
-                                           />
+                                    <input  class="form-control" type="number" name="telefone" size="45"
+                                            placeholder="xxxxx-xxxx" required
+                                            value= "<c:out value='${site.telefone}' />"       
+                                            />
                                 </td>
                             </tr>
                         </table>  
