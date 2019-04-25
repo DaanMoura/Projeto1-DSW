@@ -23,17 +23,10 @@
 
 
                 <form name="form">
-<<<<<<< HEAD
-                    <table border="1" cellpadding="5">
-                        <input type="hidden"
-                               name="${_csrf.parameterName}"
-                               value="${_csrf.token}"/> 
-=======
                     <table>
                         <input type="hidden"
                                name="${_csrf.parameterName}"
                                value="${_csrf.token}"/>
->>>>>>> frontEnd
                         <caption>
                             <h2>
                                 <c:if test="${sala != null}">
