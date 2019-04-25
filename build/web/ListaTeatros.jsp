@@ -8,47 +8,43 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <f:bundle basename="i18n.mensagens">
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><f:message key="page.title" /></title>
-    </head>
-    <body>
-        
-        <div align="center">
-        <table border="1" cellpadding="5">
-            <caption><h2><f:message key="listtheater.title" /></h2></caption>
+    <table class="table">
+        <thead>
             <tr>
                 <th><f:message key="cnpj.label" /></th>
                 <th><f:message key="name.label" /></th>
                 <th><f:message key="city.label" /></th>
-                <th><f:message key="action.label" /></th>
-          
+
+                <sec:authorize access="hasRole('ADMIN')">
+                    <th><f:message key="action.label" /></th>
+                </sec:authorize>
+
             </tr>
+        </thead>
+        <tbody>
             <c:forEach var="sala" items="${requestScope.ListaTeatros}">
                 <tr>
                     <td><c:out value="${sala.CNPJ}" /></td>
                     <td><c:out value="${sala.nome}" /></td>
                     <td><c:out value="${sala.cidade}" /></td>
-                  
-                    <td>
-                        <a href="edicaoTeatro?CNPJ=<c:out value='${sala.CNPJ}' />"><f:message key="edit.label" /></a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="remocaoTeatro?CNPJ=<c:out value='${sala.CNPJ}' />" 
-                           onclick="return confirm('Tem certeza de que deseja excluir este item?');">
-                            <f:message key="remove.label" />
-                        </a>                    	
-                    </td>
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <td>
+                            <a href="edicaoTeatro?CNPJ=<c:out value='${sala.CNPJ}' />"><f:message key="edit.label" /></a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="remocaoTeatro?CNPJ=<c:out value='${sala.CNPJ}' />" 
+                               onclick="return confirm('Tem certeza de que deseja excluir este item?');">
+                                <f:message key="remove.label" />
+                            </a>                    	
+                        </td>
+                    </sec:authorize>
+
                 </tr>
             </c:forEach>
-        </table>
-    </div>
-        
-    <center>    
-        <br><a href="CadastroTeatro.jsp"><f:message key="newregister.label" /></a>
-    </center>
-    </f:bundle>
-    </body>
-</html>
+        </tbody>
+    </table>
+</f:bundle>
+
 

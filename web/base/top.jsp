@@ -15,6 +15,7 @@
             <title><f:message key="page.title"/></title>
         </head>
         <body>
+            
             <sec:authorize access="hasRole('ADMIN')">
 
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

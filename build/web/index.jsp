@@ -7,44 +7,40 @@
 <%@include file="base/top.jsp" %>
 <f:bundle basename="i18n.mensagens">
 
-    <div class="container mt-2">
-        <h1 class="display-4"><f:message key="welcome.index"/></h1>
-        <h3><f:message key="message.index"/></h3>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th><f:message key="cnpj.label" /></th>
-                    <th><f:message key="name.label" /></th>
-                    <th><f:message key="city.label" /></th>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4"><f:message key="welcome.index"/></h1>  
+            <p class="lead">This is a system to manage tickets sales websites</p>
+            <a href="/Avaliacao1/login" class="btn btn-primary" role="button" aria-pressed="true">Login</a>
+        </div>
+    </div>
 
-                    <sec:authorize access="hasRole('ADMIN')">
-                        <th><f:message key="action.label" /></th>
-                    </sec:authorize>
+    <div class="container">
+        <p class="lead"><f:message key="message.index"/></p>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-teatros-tab" data-toggle="pill" href="#pills-teatros" role="tab" aria-controls="pills-teatros" aria-selected="true">Teatros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-cidade-tab" data-toggle="pill" href="#pills-cidade" role="tab" aria-controls="pills-cidade" aria-selected="false">Por cidade</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-promo-tab" data-toggle="pill" href="#pills-promo" role="tab" aria-controls="pills-promo" aria-selected="false">Promoções</a>
+            </li>
+        </ul>
 
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="sala" items="${requestScope.ListaTeatros}">
-                    <tr>
-                        <td><c:out value="${sala.CNPJ}" /></td>
-                        <td><c:out value="${sala.nome}" /></td>
-                        <td><c:out value="${sala.cidade}" /></td>
-                        <sec:authorize access="hasRole('ADMIN')">
-                            <td>
-                                <a href="edicaoTeatro?CNPJ=<c:out value='${sala.CNPJ}' />"><f:message key="edit.label" /></a>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="remocaoTeatro?CNPJ=<c:out value='${sala.CNPJ}' />" 
-                                   onclick="return confirm('Tem certeza de que deseja excluir este item?');">
-                                    <f:message key="remove.label" />
-                                </a>                    	
-                            </td>
-                        </sec:authorize>
-
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-teatros" role="tabpanel" aria-labelledby="pills-teatros-tab">
+                <%@include file="ListaTeatros.jsp" %>
+            </div>
+            <div class="tab-pane fade" id="pills-cidade" role="tabpanel" aria-labelledby="pills-cidade-tab">
+                PRECISA SER IMPLEMENTADO
+            </div>
+            <div class="tab-pane fade" id="pills-promo" role="tabpanel" aria-labelledby="pills-promo-tab">
+                <%@include file="ListaPromocao.jsp" %>
+            </div>
+        </div>
     </div>
 
 </f:bundle>
