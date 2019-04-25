@@ -7,14 +7,15 @@
 <%@include file="base/top.jsp" %>
 <f:bundle basename="i18n.mensagens">
 
-
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-4"><f:message key="welcome.index"/></h1>  
-            <p class="lead">This is a system to manage tickets sales websites</p>
-            <a href="/Avaliacao1/login" class="btn btn-primary" role="button" aria-pressed="true">Login</a>
+    <sec:authorize access="isAnonymous()">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4"><f:message key="welcome.index"/></h1>  
+                <p class="lead">This is a system to manage tickets sales websites</p>
+                <a href="/Avaliacao1/login" class="btn btn-primary" role="button" aria-pressed="true">Login</a>
+            </div>
         </div>
-    </div>
+    </sec:authorize>
 
     <div class="container">
         <p class="lead"><f:message key="message.index"/></p>

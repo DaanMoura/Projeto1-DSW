@@ -15,7 +15,7 @@
             <title><f:message key="page.title"/></title>
         </head>
         <body>
-            
+
             <sec:authorize access="hasRole('ADMIN')">
 
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -26,18 +26,21 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="#"> Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
+                                <a class="nav-link" href="#">Cadastrar Sites</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
+                                <a class="nav-link" href="#">Cadastrar Teatros</a>
                             </li>
                         </ul>
                         <span class="navbar-text">
                             You are admin
                         </span>
+                        <a href="/Avaliacao1/logout" class="btn btn-primary ml-2" role="button" aria-pressed="true">Logout</a>
+
+
                     </div>
                 </nav>
 
