@@ -1,49 +1,38 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <f:bundle basename="i18n.mensagens">
-<!DOCTYPE html>
-<html>
-     <head>
-        <title>Site de Vendas</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <center>
-        <h1><f:message key="avaliacao.title" /></h1>
-		
-                        <div style="margin-top: 110px;"> 
-                            <h3>
-                                Sites
-                            </h3>
-			<a href="CadastroSite.jsp"><font face="verdana" size="4" color="red"></font><f:message key="register.title" /></a>
-                        &nbsp;&nbsp;&nbsp;
-                        <a href="admin"><f:message key="list.title" /></a>
-                        </div>
-			
-			<div style="margin: 30px;">
-                            <h3>
-                                <f:message key="promo.title" />
-                            </h3>
-			<a href="CadastroPromocao.jsp"><font face="verdana" size="4" color="red"></font><f:message key="register.title" /></a>
-			&nbsp;&nbsp;&nbsp;
-                        <a href="PromocaoController"><f:message key="list.title" /></a>
-                        &nbsp;&nbsp;&nbsp;
-                        <a href="ListaPromocaoByTeatro.jsp"><f:message key="search.label" /></a>
-                        </div>
-			
-			<div style="margin: 30px;">
-                            <h3>
-                                <f:message key="sala.title" />
-                            </h3>
-			<a href="CadastroTeatro.jsp"><font face="verdana" size="4" color="red"></font><f:message key="register.title" /></a>
-                        &nbsp;&nbsp;&nbsp;
-                        <a href="SalaTeatroController"><f:message key="list.title" /></a>
-                        </div>
-            
-        </center>
-    </body>
-</f:bundle>
+    <%@include file="base/top.jsp" %>
+    <div class="container">
+        <h1 class="display-4"><f:message key="welcome.index"/></h1>
+        <div class="row">
+            <div class="col-11">
+                <p class="lead"><f:message key="message.index"/></p>
+            </div>
+            <div class="col-1">
+                <a href="/Avaliacao1/cadastroTeatro" class="btn btn-primary mr-2" role="button" aria-pressed="true">+</a>
+            </div>
+        </div>
+        <%@include file="ListaTeatros.jsp" %>
+    </div>
+
+</body>
+<script src="style/js/bootstrap.js"></script>
+<script src="style/js/bootstrap.bundle.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </html>
+
+
+</f:bundle>
+
+
+
+
+

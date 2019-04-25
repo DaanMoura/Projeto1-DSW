@@ -8,37 +8,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <f:bundle basename="i18n.mensagens">
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><f:message key="page.title" /></title>
-    </head>
-    <body>
-    <center>
-        <h1> <f:message key="sala.title" /></h1>
-    </center>
-    <div align="center">
+    <!DOCTYPE html>
+    <%@include file="base/top.jsp" %>
+    <div class="container">
         <c:if test="${sala != null}"> 
             <form action="atualizacaoTeatro" method="post">
+                <h2><f:message key="edit.title" /></h2>
             </c:if>
+
             <c:if test="${sala == null}">
                 <form action="insercaoTeatro" method="post">
+                    <h2><f:message key="register.title" /></h2>
                 </c:if>
+
+
                 <form name="form">
-                    <table border="1" cellpadding="5">
+                    <table>
                         <input type="hidden"
                                name="${_csrf.parameterName}"
-                               value="${_csrf.token}"/> 
+                               value="${_csrf.token}"/>
                         <caption>
                             <h2>
                                 <c:if test="${sala != null}">
-                                    <f:message key="edit.title" />
-                                    <input type="hidden" name="CNPJ" value="<c:out value='${sala.CNPJ}' />" 
-                                           />
+                                    <input type="hidden" name="CNPJ" value="<c:out value='${sala.CNPJ}' />"/>
                                 </c:if>
+
                                 <c:if test="${sala == null}">
-                                    <f:message key="register.title" />
                                     <tr>
                                         <th><f:message key="cnpj.label" /> </th>
                                         <td>
@@ -87,11 +82,13 @@
                     <br>
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value=<f:message key="register.title" /> />
+                            <input class="btn btn-primary" type="submit" value=<f:message key="register.title" /> />
                         </td>
                     </tr>
                 </form>
                 </div>
+                </div>
+
                 </body>
-</f:bundle>
-                </html>
+            </f:bundle>
+            </html>

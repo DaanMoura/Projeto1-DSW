@@ -38,15 +38,16 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/SalaTeatroController").hasRole("USER")
-                .anyRequest().authenticated()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
+//                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .and()
                 .httpBasic()
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/"); //Tentando ir para index depois de logout
     }
 }

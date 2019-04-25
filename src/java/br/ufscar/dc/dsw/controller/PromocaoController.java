@@ -33,7 +33,7 @@ import static javax.xml.bind.DatatypeConverter.parseDate;
  *
  * @author augusto
  */
-@WebServlet(urlPatterns = {"/PromocaoController"})
+@WebServlet(urlPatterns = {"/promocao"})
 public class PromocaoController extends HttpServlet {
 
      private PromocaoDAO dao = new PromocaoDAO();
