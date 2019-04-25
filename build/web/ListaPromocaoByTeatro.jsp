@@ -60,9 +60,9 @@
                                 <td><c:out value="${promocao.preco}" /></td>
 
                                 <td>
-                                    <a href="edicaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />&url=<c:out value='${promocao.url}'/>&horario=<c:out value='${promocao.horario}'/>"><f:message key="edit.title" /></a>
+                                    <a href="edicaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />&url=<c:out value='${promocao.url}'/>&horario=<c:out value='${promocao.horario}'/>&listaByTeatro=true"><f:message key="edit.title" /></a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="remocaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />&url=<c:out value='${promocao.url}'/>&horario=<c:out value='${promocao.horario}'/>" 
+                        <a href="remocaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />&url=<c:out value='${promocao.url}'/>&horario=<c:out value='${promocao.horario}'/>&listaByTeatro=true" 
                            onclick="return confirm('Tem certeza de que deseja excluir este item?');">
                             <f:message key="remove.label" />
                         </a>                    	

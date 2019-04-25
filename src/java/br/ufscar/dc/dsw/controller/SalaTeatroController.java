@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author augusto
  */
-@WebServlet(urlPatterns = {"/SalaTeatroController"})
+@WebServlet(urlPatterns = {""})
 public class SalaTeatroController extends HttpServlet {
 private SalaTeatroDAO dao = new SalaTeatroDAO();
     /**
@@ -66,7 +66,9 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
             case "/atualizacaoTeatro":
                 update(request,response);
                 break;
-            
+            case "/":
+                lista(request,response);
+                break;
             default:
                 lista(request,response);
         
@@ -80,7 +82,7 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
     public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
         List<SalaTeatro> lista = dao.getAll();
         request.setAttribute("ListaTeatros", lista);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaTeatros.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request,response); 
     }
     
@@ -106,14 +108,14 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
         
         SalaTeatro sala = new SalaTeatro(CNPJ,email,senha,nome,cidade);
         dao.insert(sala);
-        response.sendRedirect("SalaTeatroController");
+        response.sendRedirect("/Avaliacao1");
     }
     
     public void remove(HttpServletRequest request,HttpServletResponse response) throws IOException, SQLException{
         String CNPJ = request.getParameter("CNPJ");
         SalaTeatro sala = dao.getFromCnpj(CNPJ);
         dao.delete(sala);
-        response.sendRedirect("SalaTeatroController");
+        response.sendRedirect("/Avaliacao1");
     }
     
     public void update(HttpServletRequest request,HttpServletResponse response) throws IOException, SQLException{
@@ -125,7 +127,7 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
         
         SalaTeatro sala = new SalaTeatro(CNPJ,email,senha,nome,cidade);
         dao.update(sala);
-        response.sendRedirect("SalaTeatroController");
+        response.sendRedirect("/Avaliacao1");
     }
     /**
      * Handles the HTTP <code>POST</code> method.

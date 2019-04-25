@@ -46,6 +46,47 @@ public class SiteVendasDAO {
         statement.close();
         conn.close();
     }
+    public void removeUsuario(String email)throws SQLException{
+        String sql = "DELETE FROM Usuario where email = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,email);
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
+    public void removePapel(String email)throws SQLException{
+        String sql = "DELETE FROM Papel where email = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,email);
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
+    public void updateUsuario(String url, String novo_email) throws SQLException{
+        String sql = "UPDATE Usuario SET email = ? where email = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, novo_email);
+        SiteVendas site = getFromURL(url);
+        statement.setString(2,site.getEmail());
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
+    
+    public void updatePapel(String url, String novo_email) throws SQLException{
+        String sql = "UPDATE Papel SET email = ? where email = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, novo_email);
+        SiteVendas site = getFromURL(url);
+        statement.setString(2,site.getEmail());
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
     public void insert(SiteVendas site) throws SQLException{
         insertUsuario(site.getEmail(),site.getSenha());
         insertPapel(site.getEmail());
@@ -122,13 +163,15 @@ public class SiteVendasDAO {
     }
 
     public void update(SiteVendas site) throws SQLException {
+        updateUsuario(site.getUrl(),site.getEmail());
+        updatePapel(site.getUrl(),site.getEmail());
         String sql = "UPDATE SiteVendas SET "
                 + "email = ?, "
                 + "senha = ?, "
                 + "nome = ?, "
                 + "telefone = ? "
                 + "WHERE url = ?";
-        
+            
        
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -146,6 +189,8 @@ public class SiteVendasDAO {
     }
     
     public void delete(SiteVendas site) throws SQLException{
+        removeUsuario(getFromURL(site.getUrl()).getEmail());
+       removePapel(getFromURL(site.getUrl()).getEmail());
         String sql = "DELETE FROM SiteVendas where url = ?";
         
         

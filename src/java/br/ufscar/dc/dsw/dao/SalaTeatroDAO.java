@@ -14,13 +14,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
  * @author daniel
  */
 public class SalaTeatroDAO {
-    
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     public SalaTeatroDAO() {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -33,7 +34,30 @@ public class SalaTeatroDAO {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/VendaIngressoBD", "root", "root");
     }
     
+    public void insertPapel(String email) throws SQLException {
+        String sql = "INSERT INTO Papel (email,nome) VALUES (?,?)";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, email);
+        statement.setString(2, "ROLE_TEATRO");
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
+     public void insertUsuario(String email,String senha) throws SQLException{
+    String sql = "INSERT INTO Usuario (email,senha,ativo) VALUES (?,?,?)";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,email);
+        statement.setString(2,encoder.encode(senha));
+        statement.setBoolean(3,true);
+        statement.execute();
+        statement.close();
+        conn.close();        
+    }
     public void insert(SalaTeatro sala) throws SQLException {
+        insertUsuario(sala.getEmail(),sala.getSenha());
+        insertPapel(sala.getEmail());
         String sql = "INSERT INTO SalaTeatro "
                 + "(CNPJ, email, senha, nome, cidade) "
                 + "VALUES (?, ?, ?, ?, ?)";
@@ -52,6 +76,50 @@ public class SalaTeatroDAO {
             conn.close();
         
     }
+    
+    public void removeUsuario(String email)throws SQLException{
+        String sql = "DELETE FROM Usuario where email = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,email);
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
+    public void removePapel(String email)throws SQLException{
+        String sql = "DELETE FROM Papel where email = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1,email);
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
+    public void updateUsuario(String cnpj, String novo_email) throws SQLException{
+        String sql = "UPDATE Usuario SET email = ? where email = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, novo_email);
+        SalaTeatro sala = getFromCnpj(cnpj);
+        statement.setString(2,sala.getEmail());
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
+    
+     public void updatePapel(String cnpj, String novo_email) throws SQLException{
+        String sql = "UPDATE Papel SET email = ? where email = ?";
+        Connection conn = this.getConnection();
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, novo_email);
+        SalaTeatro sala = getFromCnpj(cnpj);
+        statement.setString(2,sala.getEmail());
+        statement.execute();
+        statement.close();
+        conn.close();
+    }
+    
+    
     
     public List<SalaTeatro> getAll()throws SQLException {
         List<SalaTeatro> salas = new ArrayList<>();
@@ -79,6 +147,9 @@ public class SalaTeatroDAO {
     }
     
     public void delete(SalaTeatro sala) throws SQLException{
+        
+        removeUsuario(getFromCnpj(sala.getCNPJ()).getEmail());
+        removePapel(getFromCnpj(sala.getCNPJ()).getEmail());
         String sql = "DELETE FROM SalaTeatro WHERE CNPJ = ?";
  
             Connection conn = this.getConnection();
@@ -92,6 +163,8 @@ public class SalaTeatroDAO {
     }
     
     public void update(SalaTeatro sala) throws SQLException {
+        updateUsuario(sala.getCNPJ(),sala.getEmail());
+        updatePapel(sala.getCNPJ(),sala.getEmail());
         String sql = "UPDATE SalaTeatro SET "
                 + "email = ?, "
                 + "senha = ?, "

@@ -27,6 +27,9 @@
                 </c:if>
                 <form name="form">
                     <table border="1" cellpadding="5">
+                        <input type="hidden"
+                               name="${_csrf.parameterName}"
+                               value="${_csrf.token}"/> 
                         <caption>
                             <h2>
                                 <c:if test="${sala != null}">

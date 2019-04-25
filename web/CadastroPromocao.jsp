@@ -26,17 +26,26 @@
                 <form action="insercaoPromocao" method="post">
                 </c:if>
                 <form name="form">
+                    <c:if test="${listaBySite}">
+                        <input type="hidden" name="listaBySite" value="true">
+                    </c:if>
+                    <c:if test="${listaByTeatro}">
+                        <input type="hidden" name="listaByTeatro" value="true">  
+                </c:if>
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/> 
                     <table border="1" cellpadding="5">
                         <caption>
                             <h2>
                                 <c:if test="${promocao != null}">
-                                    Edição<f:message key="edit.title" />
+                                   <f:message key="edit.title" />
                                     <input type="hidden" name="url" value="<c:out value='${promocao.url}' />"/> 
                                     <input type="hidden" name="CNPJ" value="<c:out value='${promocao.CNPJ}' />"/>
                                     <input type="hidden" name="horario" value="<c:out value='${promocao.horario}'/>"/>                                
                                 </c:if>
                                 <c:if test="${promocao == null}">
-                                    Cadastro<f:message key="edit.title" />    
+                                    <f:message key="edit.title" />    
                                     <tr>
                                         <th><f:message key="url.label" /> </th>
                                         <td>

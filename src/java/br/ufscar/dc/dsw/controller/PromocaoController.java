@@ -10,6 +10,7 @@ import br.ufscar.dc.dsw.model.Promocao;
 import br.ufscar.dc.dsw.model.SalaTeatro;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.Float.parseFloat;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -105,8 +106,16 @@ public class PromocaoController extends HttpServlet {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
         String hor = request.getParameter("horario");
         Date horario = dateFormat.parse(hor);
+        Boolean b = parseBoolean(request.getParameter("listaBySite"));
         Promocao promocao = dao.getFromKey(url, CNPJ,horario);
+        Boolean d = parseBoolean(request.getParameter("listaByTeatro"));
         request.setAttribute("promocao",promocao);
+        if(b){
+            request.setAttribute("listaBySite",b);
+        }
+        if(parseBoolean(request.getParameter("listaByTeatro"))){
+            request.setAttribute("listaByTeatro",parseBoolean(request.getParameter("listaByTeatro")));
+        }
         dispatcher.forward(request,response);
         
       //imcompleto  
@@ -133,7 +142,7 @@ public class PromocaoController extends HttpServlet {
         }
     }
     
-    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException, SQLException{
+    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException, SQLException, ServletException{
         String url = request.getParameter("url");
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
@@ -143,9 +152,19 @@ public class PromocaoController extends HttpServlet {
         Date horario = dateFormat.parse(hor);   
         Promocao promocao = new Promocao(url,CNPJ,nome,preco,horario);
         dao.update(promocao);
-        response.sendRedirect("PromocaoController");
+        Boolean l = parseBoolean(request.getParameter("listaBySite"));
+        if(l){
+        listaBySite(request,response);
+        }
+        else
+            if(parseBoolean(request.getParameter("listaByTeatro"))){
+                listaTeatro(request,response);
+            }
+        else{
+        response.sendRedirect("PromocaoController"); 
+        }
     }
-   public void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException, SQLException{
+   public void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException, SQLException, ServletException{
    //incompleto
    String url = request.getParameter("url");
    String CNPJ = request.getParameter("CNPJ");
@@ -156,10 +175,18 @@ public class PromocaoController extends HttpServlet {
    promocao.setHorario(horario);
    promocao.setCNPJ(CNPJ);
    promocao.setUrl(url);
-   
    dao.delete(promocao);
+   Boolean l = parseBoolean(request.getParameter("listaBySite"));
+   if(l){
+   listaBySite(request,response);
+   }
+   else
+       if(parseBoolean(request.getParameter("listaByTeatro"))){
+           listaTeatro(request,response);
+       }
+   else{
    response.sendRedirect("PromocaoController");
-
+   }
    }
    
    public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{

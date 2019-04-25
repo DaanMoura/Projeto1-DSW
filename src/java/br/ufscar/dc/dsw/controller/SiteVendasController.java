@@ -71,18 +71,18 @@ public class SiteVendasController extends HttpServlet {
         try {
             String action = request.getServletPath();
             switch(action){
-                case "/cadastro":
+                case "/cadastroSite":
                     apresentaForm(request,response);
                     break;
-                case "/edicao":
+                case "/edicaoSite":
                     apresentaFormEdicao(request,response);
-                case "/insercao":
+                case "/insercaoSite":
                     insere(request,response);
                     break;
-                case "/remocao":
+                case "/remocaoSite":
                     remove(request,response);
                     break;
-                case "/atualizacao":
+                case "/atualizacaoSite":
                     update(request,response);
                     break;
                 default:
