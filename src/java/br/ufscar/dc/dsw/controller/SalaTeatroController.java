@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author augusto
  */
-@WebServlet(urlPatterns = {"/SalaTeatroController"})
+@WebServlet(urlPatterns = {""})
 public class SalaTeatroController extends HttpServlet {
 private SalaTeatroDAO dao = new SalaTeatroDAO();
     /**
@@ -66,7 +66,8 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
             case "/atualizacaoTeatro":
                 update(request,response);
                 break;
-            
+            case "/":
+                lista(request,response);
             default:
                 lista(request,response);
         
@@ -80,7 +81,7 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
     public void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
         List<SalaTeatro> lista = dao.getAll();
         request.setAttribute("ListaTeatros", lista);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaTeatros.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request,response); 
     }
     
@@ -106,7 +107,7 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
         
         SalaTeatro sala = new SalaTeatro(CNPJ,email,senha,nome,cidade);
         dao.insert(sala);
-        response.sendRedirect("SalaTeatroController");
+        response.sendRedirect("index.jsp");
     }
     
     public void remove(HttpServletRequest request,HttpServletResponse response) throws IOException, SQLException{

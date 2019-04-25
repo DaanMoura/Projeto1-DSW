@@ -1,51 +1,49 @@
 
+
+<%-- 
+    Document   : ListaTeatros
+    Created on : 18/04/2019, 19:07:47
+    Author     : Marcos Felipe
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<%@include file="base/top.jsp" %>
 <f:bundle basename="i18n.mensagens">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <link href="style/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+            <link href="style/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+            <link href="style/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+            <link href="style/css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
 
-    <sec:authorize access="isAnonymous()">
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-4"><f:message key="welcome.index"/></h1>  
-                <p class="lead">This is a system to manage tickets sales websites</p>
-                <a href="/Avaliacao1/login" class="btn btn-primary" role="button" aria-pressed="true">Login</a>
-            </div>
+            <title><f:message key="page.title"/></title>
+        </head>
+        <%@include file="base/top.jsp" %>
+        <div class="container">
+            <h1 class="display-4"><f:message key="welcome.index"/></h1>  
+            <p class="lead"><f:message key="message.index"/></p>
+
+            <%@include file="ListaTeatros.jsp" %>
         </div>
-    </sec:authorize>
 
-    <div class="container">
-        <p class="lead"><f:message key="message.index"/></p>
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="pills-teatros-tab" data-toggle="pill" href="#pills-teatros" role="tab" aria-controls="pills-teatros" aria-selected="true">Teatros</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-cidade-tab" data-toggle="pill" href="#pills-cidade" role="tab" aria-controls="pills-cidade" aria-selected="false">Por cidade</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-promo-tab" data-toggle="pill" href="#pills-promo" role="tab" aria-controls="pills-promo" aria-selected="false">Promoções</a>
-            </li>
-        </ul>
+    </body>
+    <script src="style/js/bootstrap.js"></script>
+    <script src="style/js/bootstrap.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-        <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-teatros" role="tabpanel" aria-labelledby="pills-teatros-tab">
-                <%@include file="ListaTeatros.jsp" %>
-            </div>
-            <div class="tab-pane fade" id="pills-cidade" role="tabpanel" aria-labelledby="pills-cidade-tab">
-                PRECISA SER IMPLEMENTADO
-            </div>
-            <div class="tab-pane fade" id="pills-promo" role="tabpanel" aria-labelledby="pills-promo-tab">
-                <%@include file="ListaPromocao.jsp" %>
-            </div>
-        </div>
-    </div>
+</html>
+
 
 </f:bundle>
-<%@include file="base/bottom.jsp" %>
+
+
 
 
 

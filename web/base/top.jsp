@@ -4,17 +4,29 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <f:bundle basename="i18n.mensagens">
     <!DOCTYPE html>
-    <html>
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <link href="style/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-            <link href="style/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
-            <link href="style/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-            <link href="style/css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
-
-            <title><f:message key="page.title"/></title>
-        </head>
+    
         <body>
+            <sec:authorize access="isAnonymous()">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="/Avaliacao1/"><f:message key="page.title"/></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Avaliacao1/"> Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Avaliacao1/teatros">Listar Teatros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Avaliacao1/promocao">Listar Promocoes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </sec:authorize>	
 
             <sec:authorize access="hasRole('ADMIN')">
 
@@ -32,7 +44,7 @@
                                 <a class="nav-link" href="#">Cadastrar Sites</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Cadastrar Teatros</a>
+                                <a class="nav-link" href="/Avaliacao1/CadastroTeatro.jsp">Cadastrar Teatros</a>
                             </li>
                         </ul>
                         <span class="navbar-text">

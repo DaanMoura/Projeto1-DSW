@@ -11,7 +11,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <f:bundle basename="i18n.mensagens">
-    <table class="table">
+        <table class="table">
         <thead>
             <tr>
                 <th><f:message key="cnpj.label" /></th>
@@ -20,7 +20,7 @@
 
                 <sec:authorize access="hasRole('ADMIN')">
                     <th><f:message key="action.label" /></th>
-                </sec:authorize>
+                    </sec:authorize>
 
             </tr>
         </thead>
@@ -45,6 +45,8 @@
             </c:forEach>
         </tbody>
     </table>
+    </div>
+
 </f:bundle>
 
 
