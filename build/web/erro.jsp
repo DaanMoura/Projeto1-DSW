@@ -10,9 +10,14 @@
     </head>
     <body>
         <center>
+            
           <h1><f:message key="msg.error"/></h1>
           <h3><f:message key="description.label"/></h3>
+          <% if(response.getStatus() == 500){ %>
             <p><%= exception.getMessage()%><br/> </p>
+            <%} else{ %>
+            <p><%= response.getStatus()%><br/></p>
+            <% } %>
         </center>	
     </body>
 </html>
