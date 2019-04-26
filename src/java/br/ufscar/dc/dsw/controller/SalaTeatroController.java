@@ -86,6 +86,15 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
         dispatcher.forward(request,response); 
     }
     
+    public void listaPorCidade(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException, SQLException {
+        String cidade = request.getParameter("cidade");
+        List<SalaTeatro> lista = dao.getFromCity(cidade);
+        request.setAttribute("ListaTeatroByCidade", lista);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListaTeatroByCidade.jsp");
+        dispatcher.forward(request, response);  
+    }
+    
     
     public void apresentaForm(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException{
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroTeatro.jsp");
