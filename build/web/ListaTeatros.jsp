@@ -11,6 +11,7 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <f:bundle basename="i18n.mensagens">
+    
         <table class="table">
         <thead>
             <tr>

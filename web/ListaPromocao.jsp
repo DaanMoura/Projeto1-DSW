@@ -12,45 +12,59 @@
 
 <f:bundle basename="i18n.mensagens">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th><f:message key="url.label" /></th>
-                <th><f:message key="cnpj.label" /></th>
-                <th><f:message key="name.label" /></th>
-                <th><f:message key="date.label" /></th>
-                <th><f:message key="price.label" /></th>
-                    <sec:authorize access="hasRole('ADMIN')">
-                    <th><f:message key="action.label" /></th>
-                    </sec:authorize>
-
-            </tr>
-        </thead>
-
-        <tbody>
-            <c:forEach var="promocao" items="${requestScope.ListaPromocao}">
+    <%@include file="base/top.jsp" %>
+    <div class="container">
+        <h1 class="display-4">Sales</h1>
+        <div class="row">
+            <div class="col-11">
+                <p class="lead">See below a list of registered sales:</p>
+            </div>
+            <sec:authorize access="hasRole('TEATRO')">
+                <div class="col-1">
+                    <a href="/Avaliacao1/cadastroPromocao" class="btn btn-primary mr-2" role="button" aria-pressed="true">+</a>
+                </div>
+            </sec:authorize>
+        </div>
+        <table class="table">
+            <thead>
                 <tr>
-                    <td><c:out value="${promocao.url}" /></td>
-                    <td><c:out value="${promocao.CNPJ}" /></td>
-                    <td><c:out value="${promocao.nome}" /></td>
-                    <td><c:out value="${promocao.horario}" /></td>
-                    <td><c:out value="${promocao.preco}" /></td>
+                    <th><f:message key="url.label" /></th>
+                    <th><f:message key="cnpj.label" /></th>
+                    <th><f:message key="name.label" /></th>
+                    <th><f:message key="date.label" /></th>
+                    <th><f:message key="price.label" /></th>
+                        <sec:authorize access="hasRole('ADMIN')">
+                        <th><f:message key="action.label" /></th>
+                        </sec:authorize>
 
-                    <sec:authorize access="hasRole('ADMIN')">
-
-                        <td>
-                            <a href="edicaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />&url=<c:out value='${promocao.url}'/>&horario=<c:out value='${promocao.horario}'/>"><f:message key="edit.label" /></a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="remocaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />&url=<c:out value='${promocao.url}'/>&horario=<c:out value='${promocao.horario}'/>" 
-                               onclick="return confirm('Tem certeza de que deseja excluir este item?');">
-                                <f:message key="remove.label" />
-                            </a>                    	
-                        </td>
-                    </sec:authorize>
                 </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+                <c:forEach var="promocao" items="${requestScope.ListaPromocao}">
+                    <tr>
+                        <td><c:out value="${promocao.url}" /></td>
+                        <td><c:out value="${promocao.CNPJ}" /></td>
+                        <td><c:out value="${promocao.nome}" /></td>
+                        <td><c:out value="${promocao.horario}" /></td>
+                        <td><c:out value="${promocao.preco}" /></td>
+
+                        <sec:authorize access="hasRole('ADMIN')">
+
+                            <td>
+                                <a href="edicaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />&url=<c:out value='${promocao.url}'/>&horario=<c:out value='${promocao.horario}'/>"><f:message key="edit.label" /></a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="remocaoPromocao?CNPJ=<c:out value='${promocao.CNPJ}' />&url=<c:out value='${promocao.url}'/>&horario=<c:out value='${promocao.horario}'/>" 
+                                   onclick="return confirm('Tem certeza de que deseja excluir este item?');">
+                                    <f:message key="remove.label" />
+                                </a>                    	
+                            </td>
+                        </sec:authorize>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
     <sec:authorize access="hasRole('ADMIN')">
         <a href="CadastroPromocao.jsp"><f:message key="newregister.label" /></a>
     </sec:authorize>
