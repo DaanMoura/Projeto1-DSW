@@ -83,6 +83,8 @@ public class PromocaoController extends HttpServlet {
                  case "/listaBySite":
                      listaBySite(request, response);
                      break;
+                 case "":
+                    lista(request, response);
                  default:
                      lista(request,response);
                      

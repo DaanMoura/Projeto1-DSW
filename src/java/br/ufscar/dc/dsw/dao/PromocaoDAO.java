@@ -138,7 +138,6 @@ public class PromocaoDAO {
         }
         resultSet.close();
         conn.close();
-
       return promocoes;
     }
 

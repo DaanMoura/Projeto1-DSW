@@ -32,7 +32,8 @@
         <url-pattern>/remocaoTeatro</url-pattern>
         <url-pattern>/atualizacaoTeatro</url-pattern>
         <url-pattern>/cadastroTeatro</url-pattern>
-        <url-pattern>/edicaoTeatro</url-pattern>
+        <url-pattern>/edicaoTeatro</url-pattern>      
+        <url-pattern>/listaPorCidade</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>

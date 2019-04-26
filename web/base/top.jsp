@@ -88,9 +88,9 @@
                                 <a class="nav-link" href="/Avaliacao1/promocao">Promoções</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Suas Promoções</a>
+                                <a class="nav-link" href="/Avaliacao1/listaBySite">Suas Promoções</a>
                             </li>
-
+                            
                         </ul>
                         <span class="navbar-text">
                             You are website admin
@@ -102,7 +102,7 @@
                 </nav>
             </sec:authorize>
 
-                <!--Navbar para sites-->
+                <!--Navbar para teatros-->
                 <sec:authorize access="hasRole('TEATRO')">
 
                     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -118,6 +118,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/Avaliacao1/promocao">Promoções</a>
                                 </li>
+                                 <li class="nav-item">
+                                <a class="nav-link" href="/Avaliacao1/listaTeatro">Suas Promoções</a>
+                            </li>
 
                             </ul>
                             <span class="navbar-text">

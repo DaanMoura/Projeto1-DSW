@@ -69,6 +69,9 @@ private SalaTeatroDAO dao = new SalaTeatroDAO();
             case "/":
                 lista(request,response);
                 break;
+            case "/listaPorCidade":
+                listaPorCidade(request,response);
+                break;
             default:
                 lista(request,response);
         

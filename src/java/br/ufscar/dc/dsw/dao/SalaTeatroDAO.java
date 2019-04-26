@@ -220,7 +220,7 @@ public class SalaTeatroDAO {
             PreparedStatement statement = conn.prepareStatement(sql);
             
             statement.setString(1, cidade);
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery();
             
             while (resultSet.next()) {
                 String CNPJ = resultSet.getString("CNPJ");

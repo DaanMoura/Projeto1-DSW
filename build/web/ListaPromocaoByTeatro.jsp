@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><f:message key="page.title" /></title>
     </head>
-    <body>
+    <body>promocao
 
         <div align="center">
             <c:if test="${promocao != null}"> 
