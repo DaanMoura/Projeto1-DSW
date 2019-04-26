@@ -20,10 +20,10 @@
                 <form action="listaPorCidade" method="post">
                 </c:if>
 
-                <h1 class="display-4">Teatros por cidade</h1>
+                <h1 class="display-4"> <f:message key="teatroCity.title" /></h1>
                 <div class="row">
-                    <div class="col-7">
-                        <p class="lead">See below a list of registered sites:</p>
+                    <div class="col-8">
+                        <p class="lead"> <f:message key="desc.title" /></p>
                     </div>
                     <div class="col-3">
                         <input class="form-control" placeholder="cidade" type="text" name="cidade" required

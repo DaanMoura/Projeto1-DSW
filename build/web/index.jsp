@@ -9,9 +9,12 @@
     <%@include file="base/top.jsp" %>
     <div class="container">
         <h1 class="display-4"><f:message key="welcome.index"/></h1>
-        <div class="row">
-            <div class="col-11">
+        <div class="row justify-content-between">
+            <div class="col-9">
                 <p class="lead"><f:message key="message.index"/></p>
+            </div>
+            <div class="col-2">
+                <a href="/Avaliacao1/listaPorCidade" class="btn btn-primary mr-2" role="button" aria-pressed="true">Listar por cidade</a>
             </div>
             <sec:authorize access="hasRole('ADMIN')">
                 <div class="col-1">
