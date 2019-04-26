@@ -65,7 +65,4 @@
             </tbody>
         </table>
     </div>
-    <sec:authorize access="hasRole('ADMIN')">
-        <a href="CadastroPromocao.jsp"><f:message key="newregister.label" /></a>
-    </sec:authorize>
 </f:bundle>
