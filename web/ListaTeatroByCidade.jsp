@@ -22,16 +22,16 @@
 
                 <h1 class="display-4">Teatros por cidade</h1>
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-7">
                         <p class="lead">See below a list of registered sites:</p>
                     </div>
                     <div class="col-3">
-                        <input type="text" name="cidade" required
+                        <input class="form-control" placeholder="cidade" type="text" name="cidade" required
                                value= "<c:out value='${sala.cidade}' />"
                                />
                     </div>
                     <div class="col-1">
-                        <input type="submit"  class="btn btn-primary mr-2"value="<f:message key="search.label" />" />
+                        <input type="submit" class="btn btn-primary mr-2"value="<f:message key="search.label" />" />
 
                     </div>
                     <sec:authorize access="hasRole('ADMIN')">
