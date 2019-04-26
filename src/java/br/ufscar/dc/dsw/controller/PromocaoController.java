@@ -133,7 +133,7 @@ public class PromocaoController extends HttpServlet {
         if(dao.checkValidity(url, CNPJ, horario)){
         Promocao promocao = new Promocao(url,CNPJ,nome,preco,horario);
         dao.insert(promocao);
-        response.sendRedirect("PromocaoController");
+        response.sendRedirect("promocao");
         }
         else{
         RequestDispatcher dispatcher = request.getRequestDispatcher("CadastroPromocao.jsp");
@@ -161,7 +161,7 @@ public class PromocaoController extends HttpServlet {
                 listaTeatro(request,response);
             }
         else{
-        response.sendRedirect("PromocaoController"); 
+        response.sendRedirect("promocao"); 
         }
     }
    public void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ParseException, SQLException, ServletException{
@@ -185,7 +185,7 @@ public class PromocaoController extends HttpServlet {
            listaTeatro(request,response);
        }
    else{
-   response.sendRedirect("PromocaoController");
+   response.sendRedirect("promocao");
    }
    }
    
