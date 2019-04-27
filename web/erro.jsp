@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"  isErrorPage="true"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <f:bundle basename="i18n.mensagens">
     <!DOCTYPE html>
