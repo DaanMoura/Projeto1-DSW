@@ -42,19 +42,19 @@
                 </div>
                 <table class="table">
                     <input type="hidden"
-                               name="${_csrf.parameterName}"
-                               value="${_csrf.token}"/> 
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/> 
                     <thead>
-                    <tr>
-                        <th><f:message key="cnpj.label" /></th>
-                        <th><f:message key="name.label" /></th>
-                        <th><f:message key="city.label" /></th>
+                        <tr>
+                            <th><f:message key="cnpj.label" /></th>
+                            <th><f:message key="name.label" /></th>
+                            <th><f:message key="city.label" /></th>
+                                <sec:authorize access="hasRole('ADMIN')">
+                                <th><f:message key="action.label" /></th>
+                                </sec:authorize>
 
-                        <sec:authorize access="hasRole('ADMIN')">
-                            <th><f:message key="action.label" /></th>
-                            </sec:authorize>
 
-                    </tr>
+                        </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="sala" items="${requestScope.ListaTeatroByCidade}">

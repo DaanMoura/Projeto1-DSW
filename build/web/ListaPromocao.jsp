@@ -19,6 +19,9 @@
             <div class="col-11">
                 <p class="lead"><f:message key="descPromocao.message" /></p>
             </div>
+            <div class="col-2">
+                <a href="/Avaliacao1/listaTeatro" class="btn btn-primary mr-2" role="button" aria-pressed="true">Listar por teatro</a>
+            </div>
             <sec:authorize access="hasRole('TEATRO')">
                 <div class="col-1">
                     <a href="/Avaliacao1/cadastroPromocao" class="btn btn-primary mr-2" role="button" aria-pressed="true">+</a>
