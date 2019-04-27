@@ -23,7 +23,7 @@
                 <h1 class="display-4"> <f:message key="teatroCity.title" /></h1>
                 <div class="row">
                     <div class="col-8">
-                        <p class="lead"> <f:message key="desc.title" /></p>
+                        <p class="lead"> <f:message key="descTeatro.message" /></p>
                     </div>
                     <div class="col-3">
                         <input class="form-control" placeholder="cidade" type="text" name="cidade" required

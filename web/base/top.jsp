@@ -61,7 +61,7 @@
 
                         </ul>
                         <span class="navbar-text">
-                            You are admin
+                          <f:message key="avisoAdmin.message" />
                         </span>
                         <a href="/Avaliacao1/logout" class="btn btn-primary ml-2" role="button" aria-pressed="true">Logout</a>
 
@@ -93,7 +93,7 @@
                             
                         </ul>
                         <span class="navbar-text">
-                            You are website admin
+                                <f:message key="avisoSite.message" />
                         </span>
                         <a href="/Avaliacao1/logout" class="btn btn-primary ml-2" role="button" aria-pressed="true">Logout</a>
 
@@ -124,7 +124,7 @@
 
                             </ul>
                             <span class="navbar-text">
-                                You are theater admin
+                                <f:message key="avisoTeatro.message" />
                             </span>
                             <a href="/Avaliacao1/logout" class="btn btn-primary ml-2" role="button" aria-pressed="true">Logout</a>
 

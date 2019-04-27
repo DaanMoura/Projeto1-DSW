@@ -36,19 +36,7 @@ public class CriaUsuarios {
             roleStatement.setString(1, "admin@admin");
             roleStatement.setString(2, "ROLE_ADMIN");
             roleStatement.execute();
-
-            // Criando Usuario user com papel ROLE_USER
-            userStatement = conn.prepareStatement(userSql);
-            userStatement.setString(1, "user@user");
-            userStatement.setString(2, encoder.encode("user"));
-            userStatement.setBoolean(3, true);
-            userStatement.execute();
-
-            roleStatement = conn.prepareStatement(roleSql);
-            roleStatement.setString(1, "user@user");
-            roleStatement.setString(2, "ROLE_USER");
-            roleStatement.execute();
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

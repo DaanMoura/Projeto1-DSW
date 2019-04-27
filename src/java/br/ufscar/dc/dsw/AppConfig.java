@@ -41,6 +41,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cadastroSite").hasRole("ADMIN")
                 .antMatchers("/cadastroPromocao").hasRole("TEATRO")
                 .antMatchers("/cadastroTeatro").hasRole("ADMIN")
+                .antMatchers("/listaBySite").hasRole("SITE")
                 .and()
                 .formLogin()
                 .and()

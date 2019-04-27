@@ -14,10 +14,10 @@
 
     <%@include file="base/top.jsp" %>
     <div class="container">
-        <h1 class="display-4">Sales</h1>
+        <h1 class="display-4"><f:message key="promos.title" /></h1>
         <div class="row">
             <div class="col-11">
-                <p class="lead">See below a list of registered sales:</p>
+                <p class="lead"><f:message key="descPromocao.message" /></p>
             </div>
             <sec:authorize access="hasRole('TEATRO')">
                 <div class="col-1">
