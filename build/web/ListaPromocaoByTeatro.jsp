@@ -22,10 +22,10 @@
                     <input type="hidden" name="CNPJ" value="<c:out value='${promocao.CNPJ}' />"/>
                     <input type="hidden" name="horario" value="<c:out value='${promocao.horario}'/>"/>                                
                 </c:if>
-                <h1 class="display-4">Promoção do teatro</h1>
+                <h1 class="display-4"><f:message key="promoTeatro.title" /></h1>
                 <div class="row">
                     <div class="col-7">
-                        <p class="lead">See below a list of registered sales:</p>
+                        <p class="lead"><f:message key="descPromocao.message" /></p>
                     </div>
                     <div class="col-3">
                         <input class="form-control" placeholder="CNPJ" type="text" name="CNPJ" required

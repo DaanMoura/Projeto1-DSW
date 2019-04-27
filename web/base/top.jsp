@@ -50,13 +50,13 @@
                     <div class="collapse navbar-collapse" id="navbar">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="/Avaliacao1">Teatros</a>
+                                <a class="nav-link" href="/Avaliacao1"><f:message key="teatros.title"/></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/Avaliacao1/sites">Sites</a>
+                                <a class="nav-link" href="/Avaliacao1/sites"><f:message key="listsite.title"/></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/Avaliacao1/promocao">Promoções</a>
+                                <a class="nav-link" href="/Avaliacao1/promocao"><f:message key="promos.title"/></a>
                             </li>
 
                         </ul>
@@ -82,13 +82,13 @@
                     <div class="collapse navbar-collapse" id="navbar">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="/Avaliacao1">Teatros</a>
+                                <a class="nav-link" href="/Avaliacao1"><f:message key="teatros.title"/></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/Avaliacao1/promocao">Promoções</a>
+                                <a class="nav-link" href="/Avaliacao1/promocao"><f:message key="promos.title"/></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/Avaliacao1/listaBySite">Suas Promoções</a>
+                                <a class="nav-link" href="/Avaliacao1/listaBySite"><f:message key="suasPromo.title"/></a>
                             </li>
                             
                         </ul>
@@ -113,20 +113,20 @@
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/Avaliacao1">Teatros</a>
+                                    <a class="nav-link" href="/Avaliacao1"><f:message key="teatros.title"/></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/Avaliacao1/promocao">Promoções</a>
+                                    <a class="nav-link" href="/Avaliacao1/promocao"><f:message key="promos.title"/></a>
                                 </li>
                                  <li class="nav-item">
-                                <a class="nav-link" href="/Avaliacao1/listaTeatro">Suas Promoções</a>
+                                <a class="nav-link" href="/Avaliacao1/listaTeatro"><f:message key="suasPromo.title"/></a>
                             </li>
 
                             </ul>
                             <span class="navbar-text">
                                 <f:message key="avisoTeatro.message" />
                             </span>
-                            <a href="/Avaliacao1/logout" class="btn btn-primary ml-2" role="button" aria-pressed="true">Logout</a>
+                            <a href="/Avaliacao1/logout" class="btn btn-primary ml-2" role="button" aria-pressed="true"><f:message key="sair.message"/></a>
 
 
                         </div>

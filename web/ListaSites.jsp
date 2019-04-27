@@ -15,10 +15,10 @@
     <%@include file="base/top.jsp" %>
 
     <div class="container">
-        <h1 class="display-4">Sites</h1>
+        <h1 class="display-4"><f:message key="listsite.title" /></h1>
         <div class="row">
             <div class="col-11">
-                <p class="lead">See below a list of registered sites:</p>
+                <p class="lead"><f:message key="descSite.message" /></p>
             </div>
             <sec:authorize access="hasRole('ADMIN')">
                 <div class="col-1">

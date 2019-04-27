@@ -22,10 +22,10 @@
                     <form action="listaBySite" method="post">
                     </c:if>
 
-                    <h1 class="display-4">Promoção do site</h1>
+                    <h1 class="display-4"><f:message key="promoSite.title" /></h1>
                     <div class="row">
                         <div class="col-7">
-                            <p class="lead">See below a list of registered sales:</p>
+                            <p class="lead"><f:message key="descPromocao.message" /></p>
                         </div>
                         <div class="col-3">
                             <input class="form-control" placeholder="url" type="text" name="url" required
